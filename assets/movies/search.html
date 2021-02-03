@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie App</title>
+
+    <!-- Box-Icon -->
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Css -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content bd-container">
+            
+            <div class="header-menu-toggle">
+                <a href="/index.html" class="logo">LOGO</a>
+                <ul class="header-nav-menu">
+                    <div class="dropdown">
+                        <button class="dropdown-btn">Movie</button>
+                        <div class="dropdown-content">
+                            <a href="/index.html">Popular</a>
+                            <a href="upcoming.html">Upcoming</a>
+                            <a href="nowPlaying.html">Now Playing</a>
+                            <a href="topRated.html">Top Rated</a>
+                        </div>
+                    </div>
+                    <li><a href="/assets/tv/popular.html">TV Shows</a></li>
+                    <li><a href="/assets/people/people.html">People</a></li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <form id="form">
+                    <input type="text" id="search-movies" class="search-movies" placeholder="Search Movies">
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+
+        <section class="movie-container">
+            <div class="movies bd-container" id="movies-container">
+                <!-- List Of Movies Here-->
+           </div>
+
+           <div class="movie-info" id="movie-info">
+
+            <div class="movie-info-content bd-container" id="movie-info-content">
+
+                <div class="movie-details" id="movie-details">
+                        
+                </div>
+
+            </div>
+
+
+           </div>
+
+
+           <div class="trailer" id="trailer">
+           
+
+            <div class="trailer-video bd-container" id="trailer-video">
+                
+                <div class="trailer-youtube" id="trailer-youtube">
+
+                </div>
+
+            </div>
+
+            </div>
+
+            
+
+        </section>
+
+    </main>
+    
+
+
+    <!-- Main Js -->
+    <script src="/assets/js/search.js"></script>
+    <script src="/assets/js/navbar.js"></script>
+</body>
+</html>
