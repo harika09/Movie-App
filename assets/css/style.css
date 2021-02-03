@@ -213,9 +213,11 @@ body {
   }
 }
 
-.movie-container {
+h1 {
+  color: #ffff;
   padding-top: 80px;
 }
+
 .movie-container .movies {
   display: flex;
   flex-wrap: wrap;
@@ -503,15 +505,29 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .trailer-video {
-  background-color: #ffff;
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  border: 1px solid #888;
   width: 550px;
   max-width: 100%;
   position: relative;
   display: flex;
-  gap: 20px;
   border-radius: 4px;
+}
+.trailer-video .trailer-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #0f0f0f;
+  color: #ffff;
+}
+.trailer-video .trailer-header .btn-trailer-closed {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #ffff;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 .trailer-video .video-trailer {
   width: 550px;

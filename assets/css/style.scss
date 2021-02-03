@@ -28,9 +28,12 @@ body {
   }
 }
 
-.movie-container {
+h1 {
+  color: $White;
   padding-top: 80px;
+}
 
+.movie-container {
   .movies {
     display: flex;
     flex-wrap: wrap;
@@ -364,15 +367,31 @@ body {
   background-color: rgba(0, 0, 0, 0.4);
 
   &-video {
-    background-color: $White;
+    display: flex;
+    flex-direction: column;
     margin: auto;
-    border: 1px solid #888;
     width: 550px;
     max-width: 100%;
     position: relative;
     display: flex;
-    gap: 20px;
     border-radius: 4px;
+
+    .trailer-header {
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      background-color: $Black;
+      color: $White;
+
+      .btn-trailer-closed {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: $White;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
 
     .video-trailer {
       width: 550px;

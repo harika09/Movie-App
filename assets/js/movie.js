@@ -1,6 +1,6 @@
 import API_KEY from "./config.js"
 const API_key = API_KEY
-//const API_key = '5c55ccbac7dc48c2b93eea2b7863df0b';
+
 const image_path = "https://image.tmdb.org/t/p/w1280";
 const movieContainer = document.getElementById("movies-container");
 const movieInfoContent = document.getElementById("movie-info")
@@ -12,6 +12,7 @@ const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
+const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
 let movieArray = [];
 let page = 1;
@@ -37,7 +38,7 @@ function showLoadingBar() { //infinite scrolling animation
 
 function loadingAnimation(recomDatas){
     
-    setTimeout( showMovieInfo(recomDatas), 8000)
+    setTimeout(showMovieInfo(recomDatas), 1000)
 }
 
 
@@ -243,6 +244,9 @@ function getData(data){
 
 /* ========== Movie Cast List ========== */
 function getCast(cast){
+
+    let animation =  `<div class="lds-dual-ring"></div>`;
+
     castContainer.innerHTML = "";
     cast.forEach((casts) =>{
         const { name, profile_path} = casts;
@@ -267,7 +271,6 @@ function getCast(cast){
 
 /* ========== Movie Recommendation List ========== */
 function getRecomData(recomData){
-    
 
     recommendContainer.innerHTML = "";
     recomData.forEach((recomDatas) =>{
@@ -285,6 +288,7 @@ function getRecomData(recomData){
         recommendation_list.addEventListener('click', function(){
            loadingAnimation(recomDatas);
             getMovieId(recomDatas.id);
+           
         })
 
         recommendContainer.appendChild(recommendation_list);
@@ -306,5 +310,10 @@ btnClosed.addEventListener("click", function(){
     } else{
         movieInfoContent.style.display = 'block';
     }
+})
+
+
+btnTrailerClosed.addEventListener("click", function(){
+    trailerContainer.style.display = "none";
 })
 
