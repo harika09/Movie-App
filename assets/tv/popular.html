@@ -18,19 +18,29 @@
         <div class="header-content bd-container">
             
             <div class="header-menu-toggle">
-                <a href="/index.html" class="logo">LOGO</a>
+                <a href="/index.html" class="logo"><img src="/assets/favicon-32x32.png" alt=""></a>
                 <ul class="header-nav-menu">
                     <div class="dropdown">
-                        <button class="dropdown-btn">Movie</button>
+                        <button type="button" class="dropdown-btn">Movie</button>
                         <div class="dropdown-content">
-                            <a href="/index.html">Popular</a>
+                            <a href="/assets/tv/popular.html">Popular</a>
                             <a href="/assets/movies/upcoming.html">Upcoming</a>
-                            <a href="#">Now Playing</a>
+                            <a href="/assets/movies/nowPlaying.html">Now Playing</a>
                             <a href="/assets/movies/topRated.html">Top Rated</a>
 
                         </div>
                     </div>
-                    <li><a href="/assets/tv/popular.html">TV Shows</a></li>
+                    <div class="dropdown">
+                        <button type="button" class="dropdown-btn">TV Shows</button>
+                        <div class="dropdown-content">
+                            <a href="/assets/tv/popular.html">Popular</a>
+                            <a href="/assets/tv/airingToday.html">Airing Today</a>
+                            <a href="/assets/tv/onTv.html">On TV</a>
+                            <a href="/assets/tv/topRated.html">Top Rated</a>
+
+                        </div>
+                    </div>
+                    <!-- <li><a href="/assets/tv/popular.html">TV Shows</a></li> -->
                     <li><a href="/assets/people/people.html">People</a></li>
                 </ul>
             </div>
@@ -43,19 +53,44 @@
         </div>
     </header>
 
-    <main class="main-container">
-
+    <main class="main-container bd-container">
+        <h1>Popular TV Shows</h1>
         <section class="movie-container">
             <div class="movies bd-container" id="movies-container">
                 <!-- List Of Movies Here-->
            </div>
 
+           <div class="spinner">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+          </div>
+
            <div class="movie-info" id="movie-info">
 
             <div class="movie-info-content bd-container" id="movie-info-content">
-
+                <button class="btn-closed" id="btn-closed"><i class='bx bx-x-circle'></i></button>
                 <div class="movie-details" id="movie-details">
                         
+                </div>
+
+
+                <h4>Movie Cast:</h4>
+                <div class="cast-contianer swiper-container" >
+
+                    <div class="cast-list swiper-wrapper" id="cast-list">
+                        
+                    </div>
+                </div>
+
+                <h4>Recommendation:</h4>
+                <div class="recommendation-contianer swiper-container" >
+                   
+                    <div class="recommendation-list swiper-wrapper" id="recommendation-list">
+                        
+                    </div>
                 </div>
 
             </div>
@@ -67,7 +102,10 @@
            <div class="trailer" id="trailer">
 
             <div class="trailer-video bd-container" id="trailer-video">
-                
+                <div class="trailer-header">
+                    <h3>Play Trailer</h3>
+                    <button class="btn-trailer-closed" id="btn-trailer-closed"><i class='bx bx-x-circle'></i></button>
+                </div>
                 <div class="trailer-youtube" id="trailer-youtube">
 
                 </div>
@@ -81,8 +119,17 @@
     </main>
     
 
+<!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous"></script>
+    <!-- Swiper Js -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <!-- Main Js -->
-    <script src="/assets/js/tvpopular.js"></script>
+    <script src="/assets/js/swiper.js"></script>
+    <script src="/assets/js/tvJs/tvpopular.js" type="module"></script>
     <script src="/assets/js/navbar.js"></script>
 </body>
 </html>

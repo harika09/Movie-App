@@ -1,4 +1,4 @@
-import API_KEY from "./config.js"
+import API_KEY from "../config.js"
 const API_key = API_KEY
 
 const image_path = "https://image.tmdb.org/t/p/w1280";
@@ -244,9 +244,6 @@ function getData(data){
 
 /* ========== Movie Cast List ========== */
 function getCast(cast){
-
-    let animation =  `<div class="lds-dual-ring"></div>`;
-
     castContainer.innerHTML = "";
     cast.forEach((casts) =>{
         const { name, profile_path} = casts;

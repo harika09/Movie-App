@@ -1,5 +1,5 @@
 
-import API_KEY from "./config.js"
+import API_KEY from "../config.js"
 const API_key = API_KEY
 //const API_key = '5c55ccbac7dc48c2b93eea2b7863df0b';
 const image_path = "https://image.tmdb.org/t/p/w1280";
@@ -49,7 +49,7 @@ getMovies().catch(error => {
 
 async function getMovies(){
 
-    const base_URL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_key}&language=en-US&page=${page}`;
+    const base_URL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${API_key}&page=${page}`;
     const response  = await fetch(base_URL);
     movieArray = await response.json();
 
