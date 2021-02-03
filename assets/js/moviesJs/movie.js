@@ -18,7 +18,17 @@ let movieArray = [];
 let page = 1;
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
-window.addEventListener("scroll", () =>{
+
+$(window).on("scroll", function() {
+	var scrollHeight = $(document).height();
+	var scrollPosition = $(window).height() + $(window).scrollTop();
+	if ((scrollHeight - scrollPosition) / scrollHeight === 0) {
+	    // when scroll to bottom of the page
+            showLoadingBar();
+	}
+});
+
+/*window.addEventListener("scroll", () =>{
 
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	//console.log( { scrollTop, scrollHeight, clientHeight });
@@ -26,7 +36,7 @@ window.addEventListener("scroll", () =>{
         showLoadingBar();
 	}
 
-});
+});*/
 function showLoadingBar() { //infinite scrolling animation
     setTimeout(getMovies, 1000)
     page++;
