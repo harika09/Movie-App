@@ -22,7 +22,7 @@ window.addEventListener("scroll", () =>{
 
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 3) {
+	if(clientHeight + scrollTop >= scrollHeight - 5) {
         showLoadingBar();
 	}
 
