@@ -19,16 +19,7 @@ let page = 1;
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
 
-window.addEventListener('scroll',()=>{
-	const {scrollHeight,scrollTop,clientHeight} = document.documentElement;
-	if(scrollTop + clientHeight > scrollHeight - 5){
-		showLoadingBar();
-
-	}
-});
-
-
-/*window.addEventListener("scroll", () =>{
+window.addEventListener("scroll", () =>{
 
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	//console.log( { scrollTop, scrollHeight, clientHeight });
@@ -36,7 +27,8 @@ window.addEventListener('scroll',()=>{
         showLoadingBar();
 	}
 
-});*/
+});
+
 function showLoadingBar() { //infinite scrolling animation
     setTimeout(getMovies, 1000)
     page++;
