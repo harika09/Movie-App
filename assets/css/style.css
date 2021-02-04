@@ -238,6 +238,11 @@ h1 {
     margin: 1rem auto;
   }
 }
+@media screen and (max-width: 600px) {
+  .movie-container .movies-list {
+    width: 140px;
+  }
+}
 .movie-container .movies-list .movie-title {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -251,6 +256,12 @@ h1 {
   width: 160px;
   margin: 0;
   font-size: 0.9rem;
+}
+@media screen and (max-width: 600px) {
+  .movie-container .movies-list .movie-title h3 {
+    width: 80px;
+    font-size: 0.5rem;
+  }
 }
 .movie-container .movies-list img {
   width: 100%;
@@ -274,12 +285,25 @@ h1 {
   background: #eb5e0b;
   position: relative;
 }
+@media screen and (max-width: 600px) {
+  .movie-container .movies-list .ratings {
+    width: 25px;
+    height: 25px;
+    padding-top: 8px;
+    font-size: 0.5rem;
+  }
+}
 .movie-container .movies-list .ratings .percent {
   position: absolute;
   display: block;
   font-size: 0.5rem;
   bottom: 15px;
   left: 25px;
+}
+@media screen and (max-width: 600px) {
+  .movie-container .movies-list .ratings .percent {
+    font-size: 0.4rem;
+  }
 }
 .movie-container .movies-list .btn-modal {
   border: none;

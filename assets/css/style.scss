@@ -55,6 +55,12 @@ h1 {
         }
       }
 
+      @include mobile {
+        & {
+          width: 140px;
+        }
+      }
+
       .movie-title {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -68,6 +74,13 @@ h1 {
           width: 160px;
           margin: 0;
           font-size: 0.9rem;
+
+          @include mobile {
+            & {
+              width: 80px;
+              font-size: 0.5rem;
+            }
+          }
         }
       }
       img {
@@ -92,12 +105,27 @@ h1 {
         background: #eb5e0b;
         position: relative;
 
+        @include mobile {
+          & {
+            width: 25px;
+            height: 25px;
+            padding-top: 8px;
+            font-size: 0.5rem;
+          }
+        }
+
         & .percent {
           position: absolute;
           display: block;
           font-size: 0.5rem;
           bottom: 15px;
           left: 25px;
+
+          @include mobile {
+            & {
+              font-size: 0.4rem;
+            }
+          }
         }
       }
 
