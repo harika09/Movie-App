@@ -1,32 +1,58 @@
-const API_key = "5c55ccbac7dc48c2b93eea2b7863df0b";
+import API_KEY from './config.js'
+const API_key = API_KEY
 const image_path = "https://image.tmdb.org/t/p/w1280";
-const searchAPI = `https://api.themoviedb.org/3/search/person?api_key=${API_key}&language=en-US&page=1&include_adult=false&query=`
-const base_URL = `https://api.themoviedb.org/3/person/popular?api_key=${API_key}&language=en-US&page=1`;
-
-
 const movieContainer = document.getElementById("movies-container");
 const movieInfoContent = document.getElementById("movie-info")
 const movieDetails = document.getElementById("movie-details");
 const search = document.getElementById("search-movies");
 const form = document.getElementById("form");
-const trailerContainer = document.getElementById("trailer");
-const trailer = document.getElementById("trailer-youtube");
+const btnClosed = document.getElementById("btn-closed");
+const castContainer = document.getElementById("cast-list");
+
+let page = 1;
+
+window.onscroll = infiniteScroll;
+
+    // This variable is used to remember if the function was executed.
+    var isExecuted = false;
+
+    function infiniteScroll() {
+        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
+        if (window.scrollY > (document.body.offsetHeight - window.outerHeight) && !isExecuted) {
+            // Set "isExecuted" to "true" to prevent further execution
+            isExecuted = true;
+
+            // Your code goes here
+            showLoadingBar();
+
+            // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
+            setTimeout(() => {
+                isExecuted = false;
+            }, 1000);
+        }
+    }
+
+
+function showLoadingBar() { //infinite scrolling animation
+    setTimeout(getActors, 1500)
+    page++;
+}
 
 
 
-getMovies(base_URL).catch(error => {
+getActors().catch(error => {
     console.log(error);
 }); ;
 
 
-async function getMovies(url){
+async function getActors(){
  
-    const response  = await fetch(url);
+    const response  = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${API_key}&language=en-US&page=${page}`);
     const Moviedata = await response.json();
 
     //console.log(Moviedata.results[0].original_title);
 
-    showMovies(Moviedata.results);
+    showActorInfo(Moviedata.results);
    
     //movies = await response.json();
 }
@@ -74,32 +100,60 @@ function getKnownFor(known_for){
 
 }
 
+function getMovieId(ID){ //getting the movie ID
+    const Id = ID;
+    const trailerURL = `https://api.themoviedb.org/3/person/${Id}/combined_credits?api_key=${API_KEY}&language=en-US`
+    console.log(Id)
+    fetch(trailerURL).then((res) => res.json())
+    .then((movieList) =>{
+        actorMovieList(movieList.cast)
+    }).catch((error)=>{
+        console.log(error);
+    })
+}
 
-function showMovies(movies){
+function actorMovieList(movieList){
+    castContainer.innerHTML = "";
+    movieList.forEach((movieLists) =>{
+        const { title, poster_path} = movieLists;
 
-    
-    movieContainer.innerHTML = " ";
+        const castList = document.createElement("div");
+        castList.classList.add("swiper-slide");
+
+        castList.innerHTML = `
+
+            <img class="actor-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+            <h4 class="actor-name">${title}</h4>
+        `
+
+        castContainer.appendChild(castList);
+
+       // $(".cast-list .swiper-slide").slice(10).remove() // display only 10 div
+    })
+}
+
+
+
+
+function showActorInfo(movies){
 
     movies.forEach((movie) => {
-        const { profile_path, name, id} = movie; 
-
-      
+        const { profile_path, name, id} = movie;       
         const movieEL = document.createElement("div");
         movieEL.classList.add("movies-list");
 
         movieEL.innerHTML = 
-         `<img src="${image_path + profile_path}" alt=${name}>
+         `<img src="${image_path + profile_path}" alt=${name} onerror="this.src = '/assets/img/poster-placeholder.svg'">
          
          <div class="movie-title">
          <h3>${name}</h3>
          </div>
          `;
 
-         
-
          movieEL.addEventListener("click", () =>{
-            showMovieInfo(movie)// it will pass the movie details
+            showActorMovieInfo(movie)// it will pass the movie details
             getKnownFor(movie.known_for);
+            getMovieId(movie.id)
             //getMovieId(movie.id)//it will pass the movie ID for the trailer
             movieInfoContent.style.display = "block";
            //console.log(movie.title)
@@ -114,20 +168,19 @@ function showMovies(movies){
 
 
 
-function showMovieInfo (movie){
+function showActorMovieInfo (movie){
 
         
   
         movieDetails.innerHTML = (`
     <div class ="overview-img">
     <img class="desktop-img" src="${image_path + movie.profile_path}">
-    <img class="mobile-img" src="${image_path + movie.known_for[0].backdrop_path}">
+
 
     </div>
     <div class="overview-text">
     <h2 class="movie-title">${movie.name}</h2>
   
-    <button class="btn-closed" id="btn-closed" onclick="closed()"><i class='bx bx-x-circle'></i></button>
     <div class="overview-details" id="overview-details">
     
     </div>
@@ -144,21 +197,15 @@ function showMovieInfo (movie){
 
 
 
+movieInfoContent.style.display = 'none' //Default hidden on page load
 
-function closed(){
-    const btn_closed = document.getElementById("btn-closed");
-
-    movieInfoContent.style.display = 'none' //Default hidden on page load
-
-    btn_closed.addEventListener("click", function(){
-        if(movieInfoContent.style.display !== 'none'){
-            movieInfoContent.style.display = 'none';
-        } else{
-            movieInfoContent.style.display = 'block';
-        }
-    })
-}
-
+btnClosed.addEventListener("click", function(){
+    if(movieInfoContent.style.display !== 'none'){
+        movieInfoContent.style.display = 'none';
+    } else{
+        movieInfoContent.style.display = 'block';
+    }
+})
 
 
 
