@@ -18,17 +18,40 @@ let movieArray = [];
 let page = 1;
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
-window.addEventListener("scroll", () =>{
+
+window.onscroll = infiniteScroll;
+
+    // This variable is used to remember if the function was executed.
+    var isExecuted = false;
+
+    function infiniteScroll() {
+        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
+        if (window.scrollY > (document.body.offsetHeight - window.outerHeight) && !isExecuted) {
+            // Set "isExecuted" to "true" to prevent further execution
+            isExecuted = true;
+
+            // Your code goes here
+            showLoadingBar();
+
+            // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
+            setTimeout(() => {
+                isExecuted = false;
+            }, 1000);
+        }
+    }
+/*window.addEventListener("scroll", () =>{
 
 	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
 	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 3) {
+	if(clientHeight + scrollTop >= scrollHeight - 5) {
         showLoadingBar();
 	}
 
-});
+});*/
+
+
 function showLoadingBar() { //infinite scrolling animation
-    setTimeout(getMovies, 1000)
+    setTimeout(getMovies, 1500)
     page++;
 }
 
@@ -130,7 +153,7 @@ function showTrailer(key){
       } else{
           trailerContainer.style.display = 'block'; 
           trailer.innerHTML =`
-          <iframe class="video-trailer" src="${youtubeURL+keys}" frameborder="0" allowfullscreen>
+          <iframe class="video-trailer" id="video-trailer" src="${youtubeURL+keys}" frameborder="0" allowfullscreen>
           </iframe> 
           `; 
       }
@@ -156,7 +179,7 @@ function showMovies(movies){
          `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
          
          <div class="movie-title">
-         <h3>Title: ${title}</h3>
+         <h3>${title}</h3>
 
          <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
          </div>
@@ -311,6 +334,13 @@ btnClosed.addEventListener("click", function(){
 
 
 btnTrailerClosed.addEventListener("click", function(){
+    
     trailerContainer.style.display = "none";
+
+    $("iframe").each(function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src);
+    })
+
 })
 
