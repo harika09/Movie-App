@@ -46,13 +46,7 @@ window.onscroll = infiniteScroll;
 	if(clientHeight + scrollTop >= scrollHeight - 5) {
         showLoadingBar();
 	}
-
-<<<<<<< HEAD
-});*/
-
-=======
-});
->>>>>>> c4d62b25d15a92645de90d0bbcb04ff18c9d1406
+}*/
 
 function showLoadingBar() { //infinite scrolling animation
     setTimeout(getMovies, 1500)
