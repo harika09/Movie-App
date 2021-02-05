@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 .header {
+  position: relative;
   position: fixed;
   width: 100%;
   left: 0;
@@ -182,22 +183,6 @@
     text-transform: uppercase;
   }
 }
-.header .search {
-  width: 250px;
-}
-@media screen and (max-width: 900px) {
-  .header .search {
-    display: none;
-  }
-}
-.header .search-movies {
-  margin: auto;
-  padding: 10px 10px;
-  border-radius: 40px;
-  width: 100%;
-  outline: none;
-  border: 1px solid #0f0f0f;
-}
 
 * {
   margin: 0;
@@ -223,16 +208,46 @@ body {
   }
 }
 
-h1 {
-  color: #ffff;
-  padding-top: 80px;
+.main-container {
+  position: relative;
 }
-
-.movie-container .movies {
+.main-container .search {
+  display: block;
+  width: 350px;
+  max-width: 100%;
+  position: absolute;
+  top: 28px;
+  right: 1%;
+}
+@media screen and (max-width: 900px) {
+  .main-container .search {
+    position: relative;
+    top: -30px;
+    width: 98%;
+  }
+}
+.main-container .search-movies {
+  margin: auto;
+  padding: 10px 10px;
+  border-radius: 40px;
+  width: 100%;
+  outline: none;
+  border: 1px solid #0f0f0f;
+}
+.main-container h1 {
+  color: #ffff;
+  padding-top: 90px;
+}
+@media screen and (max-width: 900px) {
+  .main-container h1 {
+    padding-bottom: 50px;
+  }
+}
+.main-container .movie-container .movies {
   display: flex;
   flex-wrap: wrap;
 }
-.movie-container .movies-list {
+.main-container .movie-container .movies-list {
   display: block;
   margin: auto;
   background-color: #373b69;
@@ -244,16 +259,16 @@ h1 {
   width: 220px;
 }
 @media screen and (max-width: 900px) {
-  .movie-container .movies-list {
+  .main-container .movie-container .movies-list {
     margin: 1rem auto;
   }
 }
 @media screen and (max-width: 600px) {
-  .movie-container .movies-list {
+  .main-container .movie-container .movies-list {
     width: 165px;
   }
 }
-.movie-container .movies-list .movie-title {
+.main-container .movie-container .movies-list .movie-title {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
@@ -262,28 +277,28 @@ h1 {
   padding: 0.6rem;
   letter-spacing: 0.5px;
 }
-.movie-container .movies-list .movie-title h3 {
+.main-container .movie-container .movies-list .movie-title h3 {
   width: 170px;
   margin: 0;
   font-size: 0.8rem;
 }
 @media screen and (max-width: 600px) {
-  .movie-container .movies-list .movie-title h3 {
+  .main-container .movie-container .movies-list .movie-title h3 {
     width: 120px;
     font-size: 0.6rem;
   }
 }
-.movie-container .movies-list img {
+.main-container .movie-container .movies-list img {
   width: 100%;
   cursor: pointer;
   border-radius: 3px;
 }
 @media screen and (max-width: 900px) {
-  .movie-container .movies-list img {
+  .main-container .movie-container .movies-list img {
     display: block;
   }
 }
-.movie-container .movies-list .ratings {
+.main-container .movie-container .movies-list .ratings {
   margin-top: 3px;
   width: 35px;
   height: 35px;
@@ -296,14 +311,14 @@ h1 {
   position: relative;
 }
 @media screen and (max-width: 600px) {
-  .movie-container .movies-list .ratings {
+  .main-container .movie-container .movies-list .ratings {
     width: 25px;
     height: 25px;
     padding-top: 8px;
     font-size: 0.5rem;
   }
 }
-.movie-container .movies-list .ratings .percent {
+.main-container .movie-container .movies-list .ratings .percent {
   position: absolute;
   display: block;
   font-size: 0.5rem;
@@ -311,11 +326,11 @@ h1 {
   left: 25px;
 }
 @media screen and (max-width: 600px) {
-  .movie-container .movies-list .ratings .percent {
+  .main-container .movie-container .movies-list .ratings .percent {
     font-size: 0.4rem;
   }
 }
-.movie-container .movies-list .btn-modal {
+.main-container .movie-container .movies-list .btn-modal {
   border: none;
   outline: none;
   margin: 0 auto;
@@ -327,8 +342,7 @@ h1 {
   color: #fff;
   margin-bottom: 40px;
 }
-
-.movie-info {
+.main-container .movie-info {
   display: none;
   position: fixed;
   z-index: 1;
@@ -342,7 +356,7 @@ h1 {
   background-color: rgba(0, 0, 0, 0.4);
   padding: 15px;
 }
-.movie-info-content {
+.main-container .movie-info-content {
   background-color: #ffff;
   margin: auto;
   border: 1px solid #888;
@@ -357,31 +371,31 @@ h1 {
   overflow: auto;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content {
+  .main-container .movie-info-content {
     width: 350px;
   }
 }
-.movie-info-content .btn-closed {
+.main-container .movie-info-content .btn-closed {
   z-index: 10;
 }
-.movie-info-content .overview-img .desktop-img {
+.main-container .movie-info-content .overview-img .desktop-img {
   display: block;
   width: 100%;
   height: auto;
   max-width: 100%;
 }
-.movie-info-content .overview-img .mobile-img {
+.main-container .movie-info-content .overview-img .mobile-img {
   display: none;
 }
-.movie-info-content .movie-rating {
+.main-container .movie-info-content .movie-rating {
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
-.movie-info-content .movie-rating .movie-title {
+.main-container .movie-info-content .movie-rating .movie-title {
   font: 1.1rem;
 }
-.movie-info-content .movie-rating .ratings {
+.main-container .movie-info-content .movie-rating .ratings {
   width: 35px;
   height: 35px;
   border-radius: 50%;
@@ -392,36 +406,36 @@ h1 {
   background: #eb5e0b;
   position: relative;
 }
-.movie-info-content .movie-rating .ratings .percent {
+.main-container .movie-info-content .movie-rating .ratings .percent {
   position: absolute;
   display: block;
   font-size: 0.5rem;
   bottom: 15px;
   left: 25px;
 }
-.movie-info-content .movie-release-container {
+.main-container .movie-info-content .movie-release-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-release-container {
+  .main-container .movie-info-content .movie-release-container {
     flex-direction: column;
   }
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-release-container .movie-date p {
+  .main-container .movie-info-content .movie-release-container .movie-date p {
     font-size: 0.8rem;
     margin-bottom: 5px;
   }
 }
-.movie-info-content .movie-release-container .movie-genres {
+.main-container .movie-info-content .movie-release-container .movie-genres {
   display: flex;
   margin-left: 10px;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-release-container .movie-genres {
+  .main-container .movie-info-content .movie-release-container .movie-genres {
     margin-left: 0;
     margin-bottom: 5px;
     margin-right: 10px;
@@ -429,33 +443,33 @@ h1 {
   }
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-release-container .movie-genres .genres-list .movie-genres p {
+  .main-container .movie-info-content .movie-release-container .movie-genres .genres-list .movie-genres p {
     font-size: 0.8rem;
   }
 }
-.movie-info-content .movie-release-container .movie-trailer .btn-trailer {
+.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer {
   border: none;
   outline: none;
   background-color: transparent;
   font-size: 1rem;
 }
-.movie-info-content .movie-release-container .movie-trailer .btn-trailer:hover {
+.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer:hover {
   opacity: 0.7;
   cursor: pointer;
 }
-.movie-info-content .movie-release-container .movie-trailer .btn-trailer i {
+.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer i {
   font-size: 1.2rem;
 }
-.movie-info-content .movie-overview {
+.main-container .movie-info-content .movie-overview {
   font-size: 1.1rem;
   padding: 10px;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-overview {
+  .main-container .movie-info-content .movie-overview {
     font-size: 0.8rem;
   }
 }
-.movie-info-content .btn-closed {
+.main-container .movie-info-content .btn-closed {
   outline: none;
   border: none;
   position: absolute;
@@ -467,31 +481,31 @@ h1 {
   cursor: pointer;
 }
 @media screen and (max-width: 900px) {
-  .movie-info-content .btn-closed {
+  .main-container .movie-info-content .btn-closed {
     top: 2px;
     left: 86%;
   }
 }
-.movie-info-content h4 {
+.main-container .movie-info-content h4 {
   padding: 0 10px;
 }
-.movie-info-content .cast-contianer {
+.main-container .movie-info-content .cast-contianer {
   display: flex;
   width: 100%;
 }
-.movie-info-content .cast-contianer .cast-list {
+.main-container .movie-info-content .cast-contianer .cast-list {
   width: 100%;
 }
-.movie-info-content .cast-contianer .cast-list .swiper-slide {
+.main-container .movie-info-content .cast-contianer .cast-list .swiper-slide {
   margin-left: 10px;
   width: 25%;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .cast-contianer .cast-list .swiper-slide .actor-name {
+  .main-container .movie-info-content .cast-contianer .cast-list .swiper-slide .actor-name {
     font-size: 0.6rem;
   }
 }
-.movie-info-content .cast-contianer .cast-list .swiper-slide .actor-img {
+.main-container .movie-info-content .cast-contianer .cast-list .swiper-slide .actor-img {
   display: block;
   width: 350px;
   max-width: 100%;
@@ -499,14 +513,14 @@ h1 {
   margin: auto;
   border-radius: 4px;
 }
-.movie-info-content .recommendation-contianer {
+.main-container .movie-info-content .recommendation-contianer {
   display: flex;
   width: 100%;
 }
-.movie-info-content .recommendation-contianer .recommendation-list {
+.main-container .movie-info-content .recommendation-contianer .recommendation-list {
   width: 100%;
 }
-.movie-info-content .recommendation-contianer .recommendation-list img {
+.main-container .movie-info-content .recommendation-contianer .recommendation-list img {
   cursor: pointer;
   display: block;
   width: 350px;
@@ -515,21 +529,20 @@ h1 {
   margin: auto;
   border-radius: 4px;
 }
-.movie-info-content .recommendation-contianer .recommendation-list .swiper-slide {
+.main-container .movie-info-content .recommendation-contianer .recommendation-list .swiper-slide {
   margin-left: 10px;
   width: 35%;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .recommendation-contianer .recommendation-list .swiper-slide .recommendation-title {
+  .main-container .movie-info-content .recommendation-contianer .recommendation-list .swiper-slide .recommendation-title {
     font-size: 0.6rem;
   }
 }
-.movie-info-content .recommendation-contianer .swiper-container {
+.main-container .movie-info-content .recommendation-contianer .swiper-container {
   width: 100%;
   height: 100%;
 }
-
-.trailer {
+.main-container .trailer {
   display: none;
   position: fixed;
   z-index: 1;
@@ -542,7 +555,7 @@ h1 {
   background-color: black;
   background-color: rgba(0, 0, 0, 0.4);
 }
-.trailer-video {
+.main-container .trailer-video {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -552,14 +565,14 @@ h1 {
   display: flex;
   border-radius: 4px;
 }
-.trailer-video .trailer-header {
+.main-container .trailer-video .trailer-header {
   padding: 10px;
   display: flex;
   justify-content: space-between;
   background-color: #0f0f0f;
   color: #ffff;
 }
-.trailer-video .trailer-header .btn-trailer-closed {
+.main-container .trailer-video .trailer-header .btn-trailer-closed {
   background-color: transparent;
   outline: none;
   border: none;
@@ -567,20 +580,19 @@ h1 {
   font-size: 1.5rem;
   cursor: pointer;
 }
-.trailer-video .video-trailer {
+.main-container .trailer-video .video-trailer {
   width: 550px;
   height: 450px;
   max-width: 100%;
 }
-
-.spinner {
+.main-container .spinner {
   margin: 50px auto;
   width: 50px;
   height: 40px;
   text-align: center;
   font-size: 10px;
 }
-.spinner > div {
+.main-container .spinner > div {
   background-color: #ffff;
   height: 100%;
   width: 6px;
@@ -588,19 +600,19 @@ h1 {
   -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
   animation: sk-stretchdelay 1.2s infinite ease-in-out;
 }
-.spinner .rect2 {
+.main-container .spinner .rect2 {
   -webkit-animation-delay: -1.1s;
   animation-delay: -1.1s;
 }
-.spinner.rect3 {
+.main-container .spinner.rect3 {
   -webkit-animation-delay: -1s;
   animation-delay: -1s;
 }
-.spinner .rect4 {
+.main-container .spinner .rect4 {
   -webkit-animation-delay: -0.9s;
   animation-delay: -0.9s;
 }
-.spinner .rect5 {
+.main-container .spinner .rect5 {
   -webkit-animation-delay: -0.8s;
   animation-delay: -0.8s;
 }

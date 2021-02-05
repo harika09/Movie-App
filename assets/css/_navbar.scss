@@ -2,6 +2,7 @@
 @import "media-queries";
 
 .header {
+  position: relative;
   position: fixed;
   width: 100%;
   left: 0;
@@ -185,22 +186,6 @@
           text-transform: uppercase;
         }
       }
-    }
-  }
-
-  .search {
-    width: 250px;
-
-    @include tablet {
-      display: none;
-    }
-    &-movies {
-      margin: auto;
-      padding: 10px 10px;
-      border-radius: 40px;
-      width: 100%;
-      outline: none;
-      border: 1px solid $Black;
     }
   }
 }

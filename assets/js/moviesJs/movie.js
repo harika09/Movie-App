@@ -6,7 +6,7 @@ const movieContainer = document.getElementById("movies-container");
 const movieInfoContent = document.getElementById("movie-info")
 const movieDetails = document.getElementById("movie-details");
 const search = document.getElementById("search-movies");
-const form = document.getElementById("form");
+const formSearch = document.getElementsByClassName("form");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
@@ -76,18 +76,18 @@ async function getMovies(){
 }
 
 /* ========== Movie Search ========== */ 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const searchMovies = search.value;
+ $('.form').submit(function(event){    
+        const searchMovies = search.value;
+     if(searchMovies == ""){
+          alert('field is empty')
+        }else{
+            location.replace("/assets/movies/search.html");
+            localStorage.setItem("Movie Name", searchMovies);
+           
+        }
+        event.preventDefault();
+    })
 
-    if(searchMovies == ""){
-      alert('field is empty')
-    }else{
-        location.replace("/assets/movies/search.html");
-        localStorage.setItem("Movie Name", searchMovies);
-       
-    }
-})
 /* ========== Movie Search END ========== */ 
 
 /* ========== Movie ID ========== */ 
