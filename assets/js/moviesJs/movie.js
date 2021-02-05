@@ -11,11 +11,17 @@ const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
 const castContainer = document.getElementById("cast-list");
+const dropdownMovie = document.getElementById("dropdown-btn");
+const headerMovieList = document.getElementById("dropdown-content")
+const dropdownTv = document.getElementById("dropdown-btn-tv")
+const headerTVList = document.getElementById("tv-dropdown-content")
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
 let movieArray = [];
 let page = 1;
+
+
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
 
@@ -153,9 +159,6 @@ function showTrailer(key){
 /* ========== Movie Trailer END ========== */ 
 
 
-
-
-
 /* ========== Movie Information List ========== */ 
 function showMovies(movies){
 
@@ -204,7 +207,7 @@ function showMovieInfo (movie){
                 <p class="ratings">${parseInt(movie.vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
             </div>
 
-            <div class="movie-ratings-container">
+            <div class="movie-release-container">
                 <div class="movie-date">
                         <p>Release Date: ${movie.release_date.replace("-","/").replace("-","/")}</p>
                 </div>
@@ -334,3 +337,22 @@ btnTrailerClosed.addEventListener("click", function(){
 
 })
 
+headerMovieList.style.display = 'none' //Default hidden on page load
+
+dropdownMovie.addEventListener("click", function(){
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
+})
+
+headerTVList.style.display = 'none' //Default hidden on page load
+
+dropdownTv.addEventListener("click", function(){
+    if(headerTVList.style.display !== 'none'){
+        headerTVList.style.display = 'none';
+    } else{
+        headerTVList.style.display = 'block';
+    }
+})

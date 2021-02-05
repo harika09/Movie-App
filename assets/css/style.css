@@ -75,44 +75,36 @@
   position: relative;
   display: flex;
 }
-.header-nav-menu .dropdown {
+.header-nav-menu .dropdown,
+.header-nav-menu .tv-dropdown {
   float: left;
   overflow: hidden;
   margin-top: 5px;
 }
 @media screen and (max-width: 900px) {
-  .header-nav-menu .dropdown {
+  .header-nav-menu .dropdown,
+.header-nav-menu .tv-dropdown {
     float: none;
   }
 }
-.header-nav-menu .dropdown:hover .dropdown-content {
-  display: block;
+.header-nav-menu .dropdown-btn,
+.header-nav-menu .dropdown .dropdown-btn-tv,
+.header-nav-menu .tv-dropdown-btn,
+.header-nav-menu .tv-dropdown .dropdown-btn-tv {
   cursor: pointer;
-}
-@media screen and (max-width: 900px) {
-  .header-nav-menu .dropdown:hover .dropdown-content {
-    position: relative;
-  }
-}
-.header-nav-menu .dropdown-btn {
   border: none;
   outline: none;
   background-color: transparent;
   color: #ffff;
   margin-left: 40px;
-  font-size: 1.1rem;
+  margin-bottom: 20px;
+  font-size: 1.6rem;
   font-family: "Josefin Sans", sans-serif;
 }
-@media screen and (max-width: 900px) {
-  .header-nav-menu .dropdown-btn {
-    position: relative;
-    display: block;
-    width: 100%;
-    text-align: left;
-    font-size: 1.5rem;
-  }
-}
-.header-nav-menu .dropdown-content {
+.header-nav-menu .dropdown-content,
+.header-nav-menu .dropdown .tv-dropdown-content,
+.header-nav-menu .tv-dropdown-content,
+.header-nav-menu .tv-dropdown .tv-dropdown-content {
   display: none;
   position: absolute;
   background-color: #0f0f0f;
@@ -121,7 +113,19 @@
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
-.header-nav-menu .dropdown-content a {
+@media screen and (max-width: 900px) {
+  .header-nav-menu .dropdown-content,
+.header-nav-menu .dropdown .tv-dropdown-content,
+.header-nav-menu .tv-dropdown-content,
+.header-nav-menu .tv-dropdown .tv-dropdown-content {
+    width: 100%;
+    position: relative;
+  }
+}
+.header-nav-menu .dropdown-content a,
+.header-nav-menu .dropdown .tv-dropdown-content a,
+.header-nav-menu .tv-dropdown-content a,
+.header-nav-menu .tv-dropdown .tv-dropdown-content a {
   float: none;
   color: #ffff;
   padding: 12px 16px;
@@ -131,11 +135,17 @@
   cursor: pointer;
 }
 @media screen and (max-width: 900px) {
-  .header-nav-menu .dropdown-content a {
+  .header-nav-menu .dropdown-content a,
+.header-nav-menu .dropdown .tv-dropdown-content a,
+.header-nav-menu .tv-dropdown-content a,
+.header-nav-menu .tv-dropdown .tv-dropdown-content a {
     margin-left: 25px;
   }
 }
-.header-nav-menu .dropdown-content a:hover {
+.header-nav-menu .dropdown-content a:hover,
+.header-nav-menu .dropdown .tv-dropdown-content a:hover,
+.header-nav-menu .tv-dropdown-content a:hover,
+.header-nav-menu .tv-dropdown .tv-dropdown-content a:hover {
   background-color: #ffff;
   color: #0f0f0f;
 }
@@ -240,7 +250,7 @@ h1 {
 }
 @media screen and (max-width: 600px) {
   .movie-container .movies-list {
-    width: 140px;
+    width: 165px;
   }
 }
 .movie-container .movies-list .movie-title {
@@ -249,18 +259,18 @@ h1 {
   justify-content: space-between;
   color: #ffff;
   align-items: center;
-  padding: 1rem;
+  padding: 0.6rem;
   letter-spacing: 0.5px;
 }
 .movie-container .movies-list .movie-title h3 {
-  width: 160px;
+  width: 170px;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 @media screen and (max-width: 600px) {
   .movie-container .movies-list .movie-title h3 {
-    width: 80px;
-    font-size: 0.5rem;
+    width: 120px;
+    font-size: 0.6rem;
   }
 }
 .movie-container .movies-list img {
@@ -389,55 +399,61 @@ h1 {
   bottom: 15px;
   left: 25px;
 }
-.movie-info-content .movie-ratings-container {
+.movie-info-content .movie-release-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 10px;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-ratings-container {
+  .movie-info-content .movie-release-container {
     flex-direction: column;
   }
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-ratings-container .movie-date p {
-    font-size: 1rem;
+  .movie-info-content .movie-release-container .movie-date p {
+    font-size: 0.8rem;
     margin-bottom: 5px;
   }
 }
-.movie-info-content .movie-ratings-container .movie-genres {
+.movie-info-content .movie-release-container .movie-genres {
   display: flex;
   margin-left: 10px;
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-ratings-container .movie-genres {
+  .movie-info-content .movie-release-container .movie-genres {
     margin-left: 0;
     margin-bottom: 5px;
     margin-right: 10px;
+    font-size: 0.8rem;
   }
 }
 @media screen and (max-width: 600px) {
-  .movie-info-content .movie-ratings-container .movie-genres .genres-list .movie-genres p {
-    font-size: 1rem;
+  .movie-info-content .movie-release-container .movie-genres .genres-list .movie-genres p {
+    font-size: 0.8rem;
   }
 }
-.movie-info-content .movie-ratings-container .movie-trailer .btn-trailer {
+.movie-info-content .movie-release-container .movie-trailer .btn-trailer {
   border: none;
   outline: none;
   background-color: transparent;
   font-size: 1rem;
 }
-.movie-info-content .movie-ratings-container .movie-trailer .btn-trailer:hover {
+.movie-info-content .movie-release-container .movie-trailer .btn-trailer:hover {
   opacity: 0.7;
   cursor: pointer;
 }
-.movie-info-content .movie-ratings-container .movie-trailer .btn-trailer i {
+.movie-info-content .movie-release-container .movie-trailer .btn-trailer i {
   font-size: 1.2rem;
 }
 .movie-info-content .movie-overview {
   font-size: 1.1rem;
   padding: 10px;
+}
+@media screen and (max-width: 600px) {
+  .movie-info-content .movie-overview {
+    font-size: 0.8rem;
+  }
 }
 .movie-info-content .btn-closed {
   outline: none;

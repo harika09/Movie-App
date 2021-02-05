@@ -88,7 +88,8 @@
     position: relative;
     display: flex;
 
-    .dropdown {
+    .dropdown,
+    .tv-dropdown {
       float: left;
       overflow: hidden;
       margin-top: 5px;
@@ -99,36 +100,21 @@
         }
       }
 
-      &:hover .dropdown-content {
-        display: block;
+      &-btn,
+      .dropdown-btn-tv {
         cursor: pointer;
-
-        @include tablet {
-          & {
-            position: relative;
-          }
-        }
-      }
-
-      &-btn {
         border: none;
         outline: none;
         background-color: transparent;
         color: $White;
         margin-left: 40px;
-        font-size: 1.1rem;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
         font-family: "Josefin Sans", sans-serif;
-
-        @include tablet {
-          position: relative;
-          display: block;
-          width: 100%;
-          text-align: left;
-          font-size: 1.5rem;
-        }
       }
 
-      &-content {
+      &-content,
+      .tv-dropdown-content {
         display: none;
         position: absolute;
         background-color: $Black;
@@ -136,6 +122,13 @@
         border-radius: 2px;
         box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
         z-index: 1;
+
+        @include tablet {
+          & {
+            width: 100%;
+            position: relative;
+          }
+        }
 
         & a {
           float: none;

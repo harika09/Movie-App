@@ -10,6 +10,10 @@ const form = document.getElementById("form");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
+const dropdownMovie = document.getElementById("dropdown-btn");
+const headerMovieList = document.getElementById("dropdown-content")
+const dropdownTv = document.getElementById("dropdown-btn-tv")
+const headerTVList = document.getElementById("tv-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
@@ -18,15 +22,29 @@ let movieArray = [];
 let page = 1;
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
-window.addEventListener("scroll", () =>{
 
-	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 3) {
-        showLoadingBar();
-	}
+window.onscroll = infiniteScroll;
 
-});
+    // This variable is used to remember if the function was executed.
+    var isExecuted = false;
+
+    function infiniteScroll() {
+        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
+        if (window.scrollY > (document.body.offsetHeight - window.outerHeight) && !isExecuted) {
+            // Set "isExecuted" to "true" to prevent further execution
+            isExecuted = true;
+
+            // Your code goes here
+            showLoadingBar();
+
+            // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
+            setTimeout(() => {
+                isExecuted = false;
+            }, 1000);
+        }
+    }
+
+
 function showLoadingBar() { //infinite scrolling animation
     setTimeout(getTv, 1000)
     page++;
@@ -295,4 +313,25 @@ btnClosed.addEventListener("click", function(){
 btnTrailerClosed.addEventListener("click", function(){
     trailerContainer.style.display = "none";
 })
+
+headerMovieList.style.display = 'none' //Default hidden on page load
+
+dropdownMovie.addEventListener("click", function(){
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
+})
+
+headerTVList.style.display = 'none' //Default hidden on page load
+
+dropdownTv.addEventListener("click", function(){
+    if(headerTVList.style.display !== 'none'){
+        headerTVList.style.display = 'none';
+    } else{
+        headerTVList.style.display = 'block';
+    }
+})
+
 

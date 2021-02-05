@@ -11,6 +11,10 @@ const form = document.getElementById("form");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
+const dropdownMovie = document.getElementById("dropdown-btn");
+const headerMovieList = document.getElementById("dropdown-content")
+const dropdownTv = document.getElementById("dropdown-btn-tv")
+const headerTVList = document.getElementById("tv-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 
@@ -38,14 +42,7 @@ window.onscroll = infiniteScroll;
             }, 1000);
         }
     }
-/*window.addEventListener("scroll", () =>{
 
-	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 5) {
-        showLoadingBar();
-	}
-}*/
 
 
 function showLoadingBar() { //infinite scrolling animation
@@ -329,4 +326,23 @@ btnClosed.addEventListener("click", function(){
         movieInfoContent.style.display = 'block';
     }
 })
+
+dropdownMovie.addEventListener("click", function(){
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
+})
+
+headerTVList.style.display = 'none' //Default hidden on page load
+
+dropdownTv.addEventListener("click", function(){
+    if(headerTVList.style.display !== 'none'){
+        headerTVList.style.display = 'none';
+    } else{
+        headerTVList.style.display = 'block';
+    }
+})
+
 

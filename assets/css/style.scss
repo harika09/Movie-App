@@ -57,7 +57,7 @@ h1 {
 
       @include mobile {
         & {
-          width: 140px;
+          width: 165px;
         }
       }
 
@@ -67,18 +67,18 @@ h1 {
         justify-content: space-between;
         color: $White;
         align-items: center;
-        padding: 1rem;
+        padding: 0.6rem;
         letter-spacing: 0.5px;
 
         h3 {
-          width: 160px;
+          width: 170px;
           margin: 0;
-          font-size: 0.9rem;
+          font-size: 0.8rem;
 
           @include mobile {
             & {
-              width: 80px;
-              font-size: 0.5rem;
+              width: 120px;
+              font-size: 0.6rem;
             }
           }
         }
@@ -226,7 +226,7 @@ h1 {
       }
     }
 
-    & .movie-ratings-container {
+    & .movie-release-container {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -239,7 +239,7 @@ h1 {
       & .movie-date {
         & p {
           @include mobile {
-            font-size: 1rem;
+            font-size: 0.8rem;
             margin-bottom: 5px;
           }
         }
@@ -254,6 +254,7 @@ h1 {
             margin-left: 0;
             margin-bottom: 5px;
             margin-right: 10px;
+            font-size: 0.8rem;
           }
         }
 
@@ -261,7 +262,7 @@ h1 {
           & .movie-genres {
             p {
               @include mobile {
-                font-size: 1rem;
+                font-size: 0.8rem;
               }
             }
           }
@@ -290,6 +291,10 @@ h1 {
     & .movie-overview {
       font-size: 1.1rem;
       padding: 10px;
+
+      @include mobile {
+        font-size: 0.8rem;
+      }
     }
 
     & .btn-closed {
