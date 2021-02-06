@@ -224,6 +224,7 @@ body {
     position: relative;
     top: -30px;
     width: 98%;
+    margin-left: 2%;
   }
 }
 .main-container .search-movies {
