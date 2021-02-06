@@ -193,12 +193,11 @@ function showTv(tv){
 }
 
 function showTvInfo (movie){
-  
-        movieDetails.innerHTML = (`
+
+    movieDetails.innerHTML = (`
         <div>
             <div class ="overview-img">
                 <img class="desktop-img" src="${image_path + movie.poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-    
             </div>
 
             <div class="movie-rating">
@@ -206,7 +205,7 @@ function showTvInfo (movie){
                 <p class="ratings">${parseInt(movie.vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
             </div>
 
-            <div class="movie-ratings-container">
+            <div class="movie-release-container">
                 <div class="movie-date">
                         <p>Release Date: ${movie.first_air_date.replace("-","/").replace("-","/")}</p>
                 </div>
@@ -217,7 +216,7 @@ function showTvInfo (movie){
 
                 <div class="movie-trailer">
                    
-                    <button class="btn-trailer" id="btn-trailer" onclick="showTrailer()"><i class='bx bx-play'></i>  Play Trailer</button>
+                    <button class="btn-trailer" id="btn-trailer"><i class='bx bx-play'></i>  Play Trailer</button>
                 </div>
                 
             </div>
@@ -227,7 +226,6 @@ function showTvInfo (movie){
   
    
     `);
-
  
 }
 
@@ -312,7 +310,14 @@ btnClosed.addEventListener("click", function(){
 
 
 btnTrailerClosed.addEventListener("click", function(){
+    
     trailerContainer.style.display = "none";
+
+    $("iframe").each(function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src);
+    })
+
 })
 
 headerMovieList.style.display = 'none' //Default hidden on page load

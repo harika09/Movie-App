@@ -19,6 +19,7 @@ const dropdownPeople = document.getElementById("dropdown-btn-people")
 const headerPeopleList = document.getElementById("people-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
+const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
 let movieArray = [];
 let page = 1;
@@ -44,14 +45,7 @@ window.onscroll = infiniteScroll;
             }, 1000);
         }
     }
-/*window.addEventListener("scroll", () =>{
 
-	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 5) {
-        showLoadingBar();
-	}
-}*/
 
 
 function showLoadingBar() { //infinite scrolling animation
@@ -84,18 +78,19 @@ async function getMovies(){
 }
 
 /* ========== Movie Search ========== */ 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const searchMovies = search.value;
 
-    if(searchMovies == ""){
+$('.form').submit(function(event){    
+    const searchMovies = search.value;
+ if(searchMovies == ""){
       alert('field is empty')
     }else{
         location.replace("/assets/movies/search.html");
         localStorage.setItem("Movie Name", searchMovies);
        
     }
+    event.preventDefault();
 })
+
 /* ========== Movie Search END ========== */ 
 
 /* ========== Movie ID ========== */ 
@@ -183,7 +178,7 @@ function showMovies(movies){
          `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
          
          <div class="movie-title">
-         <h3>Title: ${title}</h3>
+         <h3>${title}</h3>
 
          <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
          </div>
@@ -218,7 +213,7 @@ function showMovieInfo (movie){
                 <p class="ratings">${parseInt(movie.vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
             </div>
 
-            <div class="movie-ratings-container">
+            <div class="movie-release-container">
                 <div class="movie-date">
                         <p>Release Date: ${movie.release_date.replace("-","/").replace("-","/")}</p>
                 </div>
@@ -229,7 +224,7 @@ function showMovieInfo (movie){
 
                 <div class="movie-trailer">
                    
-                    <button class="btn-trailer" id="btn-trailer" onclick="showTrailer()"><i class='bx bx-play'></i>  Play Trailer</button>
+                    <button class="btn-trailer" id="btn-trailer"><i class='bx bx-play'></i>  Play Trailer</button>
                 </div>
                 
             </div>
@@ -245,7 +240,6 @@ function showMovieInfo (movie){
    //castData(movie.id);
  
 }
-
 /* ========== Movie Information List END ========== */ 
 
 
@@ -336,7 +330,21 @@ btnClosed.addEventListener("click", function(){
     }
 })
 
-dropdownMovie.addEventListener("click", function(){
+btnTrailerClosed.addEventListener("click", function(){
+    
+    trailerContainer.style.display = "none";
+
+    $("iframe").each(function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src);
+    })
+
+})
+
+headerMovieList.style.display = 'none' //Default hidden on page load
+
+dropdownMovie.addEventListener("click", function(event){
+    event.preventDefault();
     if(headerMovieList.style.display !== 'none'){
         headerMovieList.style.display = 'none';
     } else{
@@ -346,11 +354,24 @@ dropdownMovie.addEventListener("click", function(){
 
 headerTVList.style.display = 'none' //Default hidden on page load
 
-dropdownTv.addEventListener("click", function(){
+dropdownTv.addEventListener("click", function(event){
+    event.preventDefault();
     if(headerTVList.style.display !== 'none'){
         headerTVList.style.display = 'none';
     } else{
         headerTVList.style.display = 'block';
     }
 })
+
+headerPeopleList.style.display = 'none' //Default hidden on page load
+
+dropdownPeople.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerPeopleList.style.display !== 'none'){
+        headerPeopleList.style.display = 'none';
+    } else{
+        headerPeopleList.style.display = 'block';
+    }
+})
+
 

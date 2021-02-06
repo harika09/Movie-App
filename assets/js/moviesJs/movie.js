@@ -6,7 +6,6 @@ const movieContainer = document.getElementById("movies-container");
 const movieInfoContent = document.getElementById("movie-info")
 const movieDetails = document.getElementById("movie-details");
 const search = document.getElementById("search-movies");
-const formSearch = document.getElementsByClassName("form");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
@@ -220,21 +219,18 @@ function showMovieInfo (movie){
 
                 <div class="movie-trailer">
                    
-                    <button class="btn-trailer" id="btn-trailer" onclick="showTrailer()"><i class='bx bx-play'></i>  Play Trailer</button>
+                    <button class="btn-trailer" id="btn-trailer"><i class='bx bx-play'></i>  Play Trailer</button>
                 </div>
                 
             </div>
-            <!--<button class="btn-closed" id="btn-closed" onclick="closed()"><i class='bx bx-x-circle'></i></button>-->
+    
             <p class="movie-overview"><span>Overview:</span> <br> ${movie.overview}</p>
     </div>
   
    
     `);
 
-   //getMovieData(movie.id);
-   //recommendData(movie.id);
-   //castData(movie.id);
- 
+
 }
 
 /* ========== Movie Information List END ========== */ 
