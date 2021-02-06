@@ -241,7 +241,7 @@ body {
 @media screen and (max-width: 900px) {
   .main-container .search {
     position: relative;
-    top: -30px;
+    top: -10px;
     width: 98%;
     margin-left: 2%;
   }
@@ -260,7 +260,7 @@ body {
 }
 @media screen and (max-width: 900px) {
   .main-container h1 {
-    padding-bottom: 50px;
+    padding-bottom: 20px;
   }
 }
 .main-container .movie-container .movies {

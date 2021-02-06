@@ -43,7 +43,7 @@ body {
     @include tablet {
       & {
         position: relative;
-        top: -30px;
+        top: -10px;
         width: 98%;
         margin-left: 2%;
       }
@@ -63,7 +63,7 @@ body {
     padding-top: 90px;
     @include tablet {
       & {
-        padding-bottom: 50px;
+        padding-bottom: 20px;
       }
     }
   }
