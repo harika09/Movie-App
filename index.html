@@ -44,7 +44,12 @@
                         </div>
                     </div>
                     <!-- <li><a href="/assets/tv/popular.html">TV Shows</a></li> -->
-                    <li><a href="/assets/people/people.html">People</a></li>
+                    <div class="people-dropdown">
+                        <button type="button" class="dropdown-btn-people" id="dropdown-btn-people">People</button>
+                        <div class="people-dropdown-content" id="people-dropdown-content">
+                            <a href="/assets/tv/popular.html">Popular people</a>
+                        </div>
+                    </div>
                 </ul>
             </div>
 
@@ -53,7 +58,7 @@
     </header>
 
     <main class="main-container bd-container">
-        <h1>Popular Movies:</h1>
+        <h1>Popular Movies</h1>
         <div class="search bd-container">
             <form id="form" class="form">
                 <input type="text" id="search-movies" class="search-movies" placeholder="Search Movies">

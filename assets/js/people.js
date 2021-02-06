@@ -6,8 +6,14 @@ const movieInfoContent = document.getElementById("movie-info")
 const movieDetails = document.getElementById("movie-details");
 const search = document.getElementById("search-movies");
 const form = document.getElementById("form");
-const btnClosed = document.getElementById("btn-closed");
 const castContainer = document.getElementById("cast-list");
+const dropdownMovie = document.getElementById("dropdown-btn");
+const headerMovieList = document.getElementById("dropdown-content")
+const dropdownTv = document.getElementById("dropdown-btn-tv")
+const headerTVList = document.getElementById("tv-dropdown-content")
+const dropdownPeople = document.getElementById("dropdown-btn-people")
+const headerPeopleList = document.getElementById("people-dropdown-content")
+const btnClosed = document.getElementById("btn-closed");
 
 let page = 1;
 
@@ -57,17 +63,21 @@ async function getActors(){
     //movies = await response.json();
 }
 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const searhMovies = search.value;
-
-    if(searhMovies == ""){
+/* ========== Movie Search ========== */ 
+$('.form').submit(function(event){    
+    const searchMovies = search.value;
+ if(searchMovies == ""){
       alert('field is empty')
     }else{
-        getMovies(searchAPI + searhMovies);
-        search.value = "";
+        location.replace("/assets/movies/search.html");
+        localStorage.setItem("Movie Name", searchMovies);
+       
     }
+    event.preventDefault();
 })
+
+/* ========== Movie Search END ========== */ 
+
 
 function getKnownFor(known_for){
 
@@ -204,6 +214,40 @@ btnClosed.addEventListener("click", function(){
         movieInfoContent.style.display = 'none';
     } else{
         movieInfoContent.style.display = 'block';
+    }
+})
+
+
+headerMovieList.style.display = 'none' //Default hidden on page load
+
+dropdownMovie.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
+})
+
+headerTVList.style.display = 'none' //Default hidden on page load
+
+dropdownTv.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerTVList.style.display !== 'none'){
+        headerTVList.style.display = 'none';
+    } else{
+        headerTVList.style.display = 'block';
+    }
+})
+
+headerPeopleList.style.display = 'none' //Default hidden on page load
+
+dropdownPeople.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerPeopleList.style.display !== 'none'){
+        headerPeopleList.style.display = 'none';
+    } else{
+        headerPeopleList.style.display = 'block';
     }
 })
 

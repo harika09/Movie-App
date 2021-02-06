@@ -63,6 +63,7 @@
   .logo img {
     width: 30px;
     max-width: 100%;
+    float: center;
   }
 
   &.sticky {
@@ -90,7 +91,8 @@
     display: flex;
 
     .dropdown,
-    .tv-dropdown {
+    .tv-dropdown,
+    .people-dropdown {
       float: left;
       overflow: hidden;
       margin-top: 5px;
@@ -102,7 +104,8 @@
       }
 
       &-btn,
-      .dropdown-btn-tv {
+      .dropdown-btn-tv,
+      .dropdown-btn-people {
         cursor: pointer;
         border: none;
         outline: none;

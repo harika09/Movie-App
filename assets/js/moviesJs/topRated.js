@@ -15,6 +15,8 @@ const dropdownMovie = document.getElementById("dropdown-btn");
 const headerMovieList = document.getElementById("dropdown-content")
 const dropdownTv = document.getElementById("dropdown-btn-tv")
 const headerTVList = document.getElementById("tv-dropdown-content")
+const dropdownPeople = document.getElementById("dropdown-btn-people")
+const headerPeopleList = document.getElementById("people-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 

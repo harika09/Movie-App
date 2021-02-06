@@ -11,6 +11,9 @@
     <!-- Css -->
     <link rel="stylesheet" href="/assets/css/style.css">
 
+    <!-- Icon-->
+    <link rel="icon" href="/assets/favicon-32x32.png">
+
 </head>
 <body>
 
@@ -30,7 +33,7 @@
 
                         </div>
                     </div>
-                    <div class="dropdown">
+                    <div class="tv-dropdown">
                         <button type="button" class="dropdown-btn-tv" id="dropdown-btn-tv">TV Shows</button>
                         <div class="tv-dropdown-content" id="tv-dropdown-content">
                             <a href="/assets/tv/popular.html">Popular</a>
@@ -41,9 +44,16 @@
                         </div>
                     </div>
                     <!-- <li><a href="/assets/tv/popular.html">TV Shows</a></li> -->
-                    <li><a href="/assets/people/people.html">People</a></li>
+                    <div class="people-dropdown">
+                        <button type="button" class="dropdown-btn-people" id="dropdown-btn-people">People</button>
+                        <div class="people-dropdown-content" id="people-dropdown-content">
+                            <a href="/assets/people/people.html">Popular people</a>
+                        </div>
+                    </div>
                 </ul>
             </div>
+
+          
         </div>
     </header>
 
@@ -51,7 +61,7 @@
         <h1>Popular TV Shows</h1>
         <div class="search bd-container">
             <form id="form" class="form">
-                <input type="text" id="search-movies" class="search-movies" placeholder="Search Movies">
+                <input type="text" id="search-movies" class="search-movies" placeholder="Search Tv Series">
             </form>
         </div>
         <section class="movie-container">

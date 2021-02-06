@@ -14,6 +14,8 @@ const dropdownMovie = document.getElementById("dropdown-btn");
 const headerMovieList = document.getElementById("dropdown-content")
 const dropdownTv = document.getElementById("dropdown-btn-tv")
 const headerTVList = document.getElementById("tv-dropdown-content")
+const dropdownPeople = document.getElementById("dropdown-btn-people")
+const headerPeopleList = document.getElementById("people-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
@@ -323,13 +325,36 @@ dropdownMovie.addEventListener("click", function(){
     }
 })
 
+headerMovieList.style.display = 'none' //Default hidden on page load
+
+dropdownMovie.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
+})
+
 headerTVList.style.display = 'none' //Default hidden on page load
 
-dropdownTv.addEventListener("click", function(){
+dropdownTv.addEventListener("click", function(event){
+    event.preventDefault();
     if(headerTVList.style.display !== 'none'){
         headerTVList.style.display = 'none';
     } else{
         headerTVList.style.display = 'block';
+    }
+})
+
+headerPeopleList.style.display = 'none' //Default hidden on page load
+
+dropdownPeople.addEventListener("click", function(event){
+    event.preventDefault();
+    if(headerPeopleList.style.display !== 'none'){
+        headerPeopleList.style.display = 'none';
+    } else{
+        headerPeopleList.style.display = 'block';
     }
 })
 

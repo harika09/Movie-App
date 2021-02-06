@@ -38,6 +38,7 @@ body {
     position: absolute;
     top: 28px;
     right: 1%;
+    z-index: 1;
 
     @include tablet {
       & {
