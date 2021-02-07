@@ -34,6 +34,12 @@ async function getMovies(){
     showTv(Moviedata.results)
 }
 
+function loadingAnimation(recomDatas){
+    
+    setTimeout( showTvInfo(recomDatas), 8000)
+}
+
+
 /* ========== Movie Search ========== */ 
 $('.form').submit(function(event){    
     const searchMovies = search.value;
@@ -114,8 +120,6 @@ function showTrailer(key){
 
 }
 /* ========== Movie Trailer END ========== */ 
-
-
 
 
 

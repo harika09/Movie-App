@@ -31,6 +31,7 @@ async function getMovies(){
     console.log(response)
     const Moviedata = await response.json();
 
+
     showMovies(Moviedata.results)
 }
 
