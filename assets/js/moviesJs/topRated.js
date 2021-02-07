@@ -205,7 +205,6 @@ function showMovieInfo (movie){
         <div>
             <div class ="overview-img">
                 <img class="desktop-img" src="${image_path + movie.poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-                <img class="mobile-img" src="${image_path + movie.backdrop_path}">
             </div>
 
             <div class="movie-rating">

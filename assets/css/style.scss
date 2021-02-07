@@ -200,7 +200,7 @@ body {
       background-color: $White;
       margin: auto;
       border: 1px solid #888;
-      width: 550px;
+      width: 450px;
       height: auto;
       max-width: 100%;
       position: relative;
@@ -226,10 +226,6 @@ body {
           width: 100%;
           height: auto;
           max-width: 100%;
-        }
-
-        & .mobile-img {
-          display: none;
         }
       }
 
@@ -419,6 +415,20 @@ body {
       }
     }
   }
+
+  //People OverView
+  .overview-info {
+    padding: 10px;
+
+    @include tablet {
+      font-size: 0.8rem;
+    }
+  }
+
+  .celebrity_name {
+    padding: 5px;
+  }
+  //People OverView END
 
   .trailer {
     display: none;

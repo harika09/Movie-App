@@ -74,17 +74,17 @@ async function getTv(){
 }
 
 /* ========== Movie Search ========== */ 
-form.addEventListener('submit', (e)=>{
-    e.preventDefault();
+$('.form').submit(function(event){    
     const searchMovies = search.value;
-
-    if(searchMovies == ""){
+ if(searchMovies == ""){
       alert('field is empty')
+      
     }else{
-        location.replace("/assets/movies/search.html");
-        localStorage.setItem("Movie Name", searchMovies);
-       
+        location.replace("/assets/tv/searchTV.html");
+        localStorage.setItem("TV", searchMovies);
+        console.log(searchMovies);
     }
+    event.preventDefault();
 })
 /* ========== Movie Search END ========== */ 
 

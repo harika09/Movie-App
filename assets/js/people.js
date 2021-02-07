@@ -95,7 +95,7 @@ function getKnownFor(known_for){
         movieEL.innerHTML = 
          `
          
-         <div class="overview-title">
+         <div class="overview-info">
 
             <p>${overview}</>
          </div>
@@ -133,7 +133,7 @@ function actorMovieList(movieList){
         castList.innerHTML = `
 
             <img class="actor-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <h4 class="actor-name">${title}</h4>
+            <h4>${title}</h4>
         `
 
         castContainer.appendChild(castList);
@@ -156,7 +156,7 @@ function showActorInfo(movies){
          `<img src="${image_path + profile_path}" alt=${name} onerror="this.src = '/assets/img/poster-placeholder.svg'">
          
          <div class="movie-title">
-         <h3>${name}</h3>
+            <h3>${name}</h3>
          </div>
          `;
 
@@ -187,7 +187,7 @@ function showActorMovieInfo (movie){
 
         </div>
         <div class="overview-text">
-        <h2 class="movie-title">${movie.name}</h2>
+        <h2 class="celebrity_name">${movie.name}</h2>
     
         <div class="overview-details" id="overview-details">
         

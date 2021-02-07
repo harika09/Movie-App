@@ -83,21 +83,26 @@ function showCelebrity(person){
 
 
 /* ========== Celebrity List ========== */
-function showActorMovieInfo (persons){
+
+
+function showActorMovieInfo (movie){
+
     movieDetails.innerHTML = (`
         <div class ="overview-img">
-        <img class="desktop-img" src="${image_path + persons.profile_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+        <img class="desktop-img" src="${image_path + movie.profile_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
 
 
         </div>
         <div class="overview-text">
-        <h2 class="movie-title">${persons.name}</h2>
+        <h2 class="celebrity_name">${movie.name}</h2>
 
         <div class="overview-details" id="overview-details">
 
         </div>
 
         `);
+
+
 }
 /* ========== Celebrity  List END  ========== */
 
@@ -117,7 +122,7 @@ function getKnownFor(known_for){
         movieEL.innerHTML = 
          `
          
-         <div class="overview-title">
+         <div class="overview-info">
 
             <p>${overview}</>
          </div>
@@ -155,7 +160,7 @@ function actorMovieList(movieList){
         castList.innerHTML = `
 
             <img class="actor-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <h4 class="actor-name">${title}</h4>
+            <h4>${title}</h4>
         `
 
         castContainer.appendChild(castList);

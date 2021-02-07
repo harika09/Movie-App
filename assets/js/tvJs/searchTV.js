@@ -1,12 +1,12 @@
+const  tvTitle = localStorage.getItem("TV");
 import API_KEY from "../config.js"
 const API_key = API_KEY
-//const API_key = '5c55ccbac7dc48c2b93eea2b7863df0b';
+
 const image_path = "https://image.tmdb.org/t/p/w1280";
-const movieContainer = document.getElementById("movies-container");
+const tvContainer = document.getElementById("movies-container");
 const movieInfoContent = document.getElementById("movie-info")
 const movieDetails = document.getElementById("movie-details");
 const search = document.getElementById("search-movies");
-const form = document.getElementById("form");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const recommendContainer = document.getElementById("recommendation-list");
@@ -20,55 +20,6 @@ const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
-let movieArray = [];
-let page = 1;
-
-/* ========== Movie Pagination Infinite Scroll ========== */ 
-window.onscroll = infiniteScroll;
-
-    // This variable is used to remember if the function was executed.
-    var isExecuted = false;
-
-    function infiniteScroll() {
-        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
-        if (window.scrollY > (document.body.offsetHeight - window.outerHeight) && !isExecuted) {
-            // Set "isExecuted" to "true" to prevent further execution
-            isExecuted = true;
-
-            // Your code goes here
-            showLoadingBar();
-
-            // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
-            setTimeout(() => {
-                isExecuted = false;
-            }, 1000);
-        }
-    }
-/*window.addEventListener("scroll", () =>{
-
-	const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-	//console.log( { scrollTop, scrollHeight, clientHeight });
-	if(clientHeight + scrollTop >= scrollHeight - 5) {
-        showLoadingBar();
-	}
-}*/
-
-
-
-function showLoadingBar() { //infinite scrolling animation
-    setTimeout(getMovies, 1000)
-    page++;
-}
-
-/* ========== Movie Pagination Infinite Scroll END ========== */ 
-
-
-
-function loadingAnimation(recomDatas){
-    
-    setTimeout( showMovieInfo(recomDatas), 8000)
-}
-
 
 getMovies().catch(error => {
     console.log(error);
@@ -76,23 +27,21 @@ getMovies().catch(error => {
 
 
 async function getMovies(){
+    tvContainer.innerHTML = "";
+    const response  = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${API_key}&language=en-US&page=1&query=${tvTitle}&include_adult=false`);
+    const Moviedata = await response.json();
 
-    const base_URL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${API_key}&page=${page}`;
-    const response  = await fetch(base_URL);
-    movieArray = await response.json();
-
-    showMovies(movieArray.results);
+    showTv(Moviedata.results)
 }
 
 /* ========== Movie Search ========== */ 
-
 $('.form').submit(function(event){    
     const searchMovies = search.value;
  if(searchMovies == ""){
       alert('field is empty')
     }else{
-        location.replace("/assets/movies/search.html");
-        localStorage.setItem("Movie Name", searchMovies);
+        location.replace("/assets/tv/searchTV.html");
+        localStorage.setItem("TV", searchMovies);
        
     }
     event.preventDefault();
@@ -100,10 +49,10 @@ $('.form').submit(function(event){
 
 /* ========== Movie Search END ========== */ 
 
-/* ========== Movie ID ========== */ 
-function getMovieId(ID){ //getting the movie ID
+//* ========== Movie ID ========== */ 
+function getTvId(ID){ //getting the movie ID
     const Id = ID;
-    const trailerURL = ` https://api.themoviedb.org/3/movie/${Id}/videos?api_key=${API_key}&language=en-US`
+    const trailerURL = ` https://api.themoviedb.org/3/tv/${Id}/videos?api_key=${API_key}&language=en-US`
 
     fetch(trailerURL).then((res) => res.json())
     .then((data) =>{
@@ -113,16 +62,7 @@ function getMovieId(ID){ //getting the movie ID
         console.log(error);
     })
 
-    const recommendation_URL = `https://api.themoviedb.org/3/movie/${Id}/recommendations?api_key=${API_key}&language=en-US&page=1`
-    fetch(recommendation_URL).then((recom)=>recom.json())
-    .then((data)=>{
-        getRecomData(data.results)
-        
-    }).catch((error)=>{
-        console.log(error);
-    })
-
-    const genresURL = `https://api.themoviedb.org/3/movie/${Id}?api_key=${API_key}&language=en-US`
+    const genresURL = `https://api.themoviedb.org/3/tv/${Id}?api_key=${API_key}&language=en-US`
     fetch(genresURL).then((res) => res.json())
     .then((data) =>{
         getData(data.genres)
@@ -130,15 +70,22 @@ function getMovieId(ID){ //getting the movie ID
         console.log(error);
     })
 
-    const cast_URL = `https://api.themoviedb.org/3/movie/${Id}/credits?api_key=${API_key}&language=en-US`;
+    const recommendation_URL = `https://api.themoviedb.org/3/tv/${Id}/recommendations?api_key=${API_key}&language=en-US&page=1`
+    fetch(recommendation_URL).then((recom)=>recom.json())
+    .then((data)=>{
+        getTVRecomData(data.results);
+    }).catch((error)=>{
+        console.log(error);
+    })
+
+    const cast_URL = `https://api.themoviedb.org/3/tv/${Id}/credits?api_key=${API_key}&language=en-US`;
     fetch(cast_URL).then((casts)=>casts.json())
     .then((data)=>{
-        getCast(data.cast);
+        getTvCast(data.cast);
     }).catch((error)=>{
         console.log(error);
     });
 
-    
 }
 /* ========== Movie ID END ========== */ 
 
@@ -173,55 +120,55 @@ function showTrailer(key){
 
 
 /* ========== Movie Information List ========== */ 
-function showMovies(movies){
+function showTv(tv){
 
-    movies.forEach((movie) => {
-        const { poster_path, title, vote_average} = movie; 
+    tv.forEach((tvData) => {
+        const { poster_path, original_name, vote_average} = tvData; 
         
-        const movieEL = document.createElement("div");
-        movieEL.classList.add("movies-list");
+        const tvEL = document.createElement("div");
+        tvEL.classList.add("movies-list");
 
-        movieEL.innerHTML = 
-         `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+        tvEL.innerHTML = 
+         `<img src="${image_path + poster_path}" alt=${original_name} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
          
          <div class="movie-title">
-         <h3>${title}</h3>
+         <h3> ${original_name}</h3>
 
          <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
          </div>
          `;
       
-         movieEL.addEventListener("click", () =>{
-            showMovieInfo(movie)// it will pass the movie details
-            getMovieId(movie.id)//it will pass the movie ID for the trailer
+         tvEL.addEventListener("click", () =>{
+            showTvInfo(tvData)// it will pass the movie details
+            getTvId(tvData.id)//it will pass the movie ID for the trailer
             //console.log(movie.id);
             movieInfoContent.style.display = "block";
            //console.log(movie.title)
 
        });
 
-         movieContainer.appendChild(movieEL);
+         tvContainer.appendChild(tvEL);
 
         
     });
 }
 
-function showMovieInfo (movie){
-  
-        movieDetails.innerHTML = (`
+function showTvInfo (movie){
+
+    movieDetails.innerHTML = (`
         <div>
             <div class ="overview-img">
                 <img class="desktop-img" src="${image_path + movie.poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
             </div>
 
             <div class="movie-rating">
-                <h2 class="movie-title">${movie.title}</h2>
+                <h2 class="movie-title">${movie.original_name}</h2>
                 <p class="ratings">${parseInt(movie.vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
             </div>
 
             <div class="movie-release-container">
                 <div class="movie-date">
-                        <p>Release Date: ${movie.release_date.replace("-","/").replace("-","/")}</p>
+                        <p>Release Date: ${movie.first_air_date.replace("-","/").replace("-","/")}</p>
                 </div>
 
                 <div class="movie-genres" id="movie-genres">
@@ -240,12 +187,10 @@ function showMovieInfo (movie){
   
    
     `);
-
-   //getMovieData(movie.id);
-   //recommendData(movie.id);
-   //castData(movie.id);
  
 }
+
+
 /* ========== Movie Information List END ========== */ 
 
 
@@ -269,8 +214,32 @@ function getData(data){
 /* ========== Movie Genres List END ========== */ 
 
 
-/* ========== Movie Cast List ========== */
-function getCast(cast){
+function getTVRecomData(recomData){
+    recommendContainer.innerHTML = "";
+    recomData.forEach((recomDatas) =>{
+        const { poster_path, original_name} = recomDatas;
+
+        const recommendation_list = document.createElement("div");
+        recommendation_list.classList.add("swiper-slide");
+
+        recommendation_list.innerHTML = `
+        
+            <img class="recommendation-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+            <h4 class="recommendation-title">${original_name}</h4>
+            `
+
+        recommendation_list.addEventListener('click', function(){
+           loadingAnimation(recomDatas);
+            getTvId(recomDatas.id);
+           
+        })
+
+        recommendContainer.appendChild(recommendation_list);
+    })
+}
+
+
+function getTvCast(cast){
     castContainer.innerHTML = "";
     cast.forEach((casts) =>{
         const { name, profile_path} = casts;
@@ -289,41 +258,6 @@ function getCast(cast){
         $(".cast-list .swiper-slide").slice(10).remove() // display only 10 div
     })
 }
-/* ========== Movie Cast List END  ========== */
-
-
-
-/* ========== Movie Recommendation List ========== */
-function getRecomData(recomData){
-    
-
-    recommendContainer.innerHTML = "";
-    recomData.forEach((recomDatas) =>{
-        const { poster_path, title, vote_coount} = recomDatas;
-
-        const recommendation_list = document.createElement("div");
-        recommendation_list.classList.add("swiper-slide");
-
-        recommendation_list.innerHTML = `
-        
-            <img class="recommendation-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <h4 class="recommendation-title">${title}</h4>
-            `
-
-        recommendation_list.addEventListener('click', function(){
-           loadingAnimation(recomDatas);
-            getMovieId(recomDatas.id);
-        })
-
-        recommendContainer.appendChild(recommendation_list);
-        
-    })
-}
-/* ========== Movie Recommendation List END ========== */
-
-
-
-
 
 /* ========== Closed Modal ========== */
 movieInfoContent.style.display = 'none' //Default hidden on page load
@@ -335,6 +269,7 @@ btnClosed.addEventListener("click", function(){
         movieInfoContent.style.display = 'block';
     }
 })
+
 
 btnTrailerClosed.addEventListener("click", function(){
     
@@ -379,4 +314,6 @@ dropdownPeople.addEventListener("click", function(event){
         headerPeopleList.style.display = 'block';
     }
 })
+
+
 

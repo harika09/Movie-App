@@ -381,7 +381,7 @@ body {
   background-color: #ffff;
   margin: auto;
   border: 1px solid #888;
-  width: 550px;
+  width: 450px;
   height: auto;
   max-width: 100%;
   position: relative;
@@ -404,9 +404,6 @@ body {
   width: 100%;
   height: auto;
   max-width: 100%;
-}
-.main-container .movie-info-content .overview-img .mobile-img {
-  display: none;
 }
 .main-container .movie-info-content .movie-rating {
   display: flex;
@@ -562,6 +559,17 @@ body {
 .main-container .movie-info-content .recommendation-contianer .swiper-container {
   width: 100%;
   height: 100%;
+}
+.main-container .overview-info {
+  padding: 10px;
+}
+@media screen and (max-width: 900px) {
+  .main-container .overview-info {
+    font-size: 0.8rem;
+  }
+}
+.main-container .celebrity_name {
+  padding: 5px;
 }
 .main-container .trailer {
   display: none;

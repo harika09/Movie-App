@@ -10,9 +10,9 @@
 
     <!-- Css -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    
-    <!-- Icon-->
-    <link rel="icon" href="/assets/favicon-32x32.png">
+
+      <!-- Icon-->
+      <link rel="icon" href="/assets/favicon-32x32.png">
 
 </head>
 <body>
@@ -58,18 +58,16 @@
     </header>
 
     <main class="main-container bd-container">
-        <h1>Popular People</h1>
+        <h1>Popular TV Shows</h1>
         <div class="search bd-container">
             <form id="form" class="form">
-                <input type="text" id="search-movies" class="search-movies" placeholder="Search Movies">
+                <input type="text" id="search-movies" class="search-movies" placeholder="Search Tv Series">
             </form>
         </div>
         <section class="movie-container">
             <div class="movies bd-container" id="movies-container">
-                
                 <!-- List Of Movies Here-->
            </div>
-
 
 
            <div class="movie-info" id="movie-info">
@@ -88,31 +86,42 @@
                         
                     </div>
                 </div>
+
+                <h4>Recommendation:</h4>
+                <div class="recommendation-contianer swiper-container" >
+                   
+                    <div class="recommendation-list swiper-wrapper" id="recommendation-list">
+                        
+                    </div>
+                </div>
+
             </div>
+
 
            </div>
 
+
            <div class="trailer" id="trailer">
+
             <div class="trailer-video bd-container" id="trailer-video">
                 <div class="trailer-header">
                     <h3>Play Trailer</h3>
                     <button class="btn-trailer-closed" id="btn-trailer-closed"><i class='bx bx-x-circle'></i></button>
                 </div>
                 <div class="trailer-youtube" id="trailer-youtube">
-                    
+
                 </div>
 
             </div>
 
-            </div>
-
-            
+             </div>
 
         </section>
 
     </main>
     
-    <!-- jQuery -->
+
+<!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="crossorigin="anonymous"></script>
     <!-- Swiper Js -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
@@ -121,9 +130,8 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <!-- Main Js -->
-
     <script src="/assets/js/swiper.js"></script>
-    <script src="/assets/js/searchPeople.js" type="module"></script>
+    <script src="/assets/js/tvJs/searchTV.js" type="module"></script>
     <script src="/assets/js/navbar.js"></script>
 </body>
 </html>
