@@ -96,28 +96,37 @@ function getKnownFor(known_for){
          `
          
          <div class="overview-title">
-
+            <h3 id="movieTitle">${movie.original_title}</h3>
             <p>${overview}</>
          </div>
          
          `;
 
+        
+       
          overview_details.appendChild(movieEL);
         
         
     });
 
-    
+    movietitle(known_for);
 
 }
 
 
-
+function movietitle(actorKnowFor){
+    const movieTitle = document.getElementById("movieTitle");
+    if (movieTitle.innerHTML = "undefined"){
+        movieTitle.innerHTML actorKnowFor.original_title;
+    }
+    console.log(actorKnowFor);
+}
 
 
 function getMovieId(ID){ //getting the movie ID
     const Id = ID;
     const trailerURL = `https://api.themoviedb.org/3/person/${Id}/combined_credits?api_key=${API_KEY}&language=en-US`
+    console.log(Id)
     fetch(trailerURL).then((res) => res.json())
     .then((movieList) =>{
         actorMovieList(movieList.cast)
