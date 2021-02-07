@@ -31,15 +31,13 @@ async function getMovies(){
     console.log(response)
     const Moviedata = await response.json();
 
-    //console.log(Moviedata.results[0].original_title);
-
     showMovies(Moviedata.results)
-    //movies = await response.json();
 }
 
 /* ========== Movie Search ========== */ 
 $('.form').submit(function(event){    
     const searchMovies = search.value;
+    console.log(searchMovies)
  if(searchMovies == ""){
       alert('field is empty')
     }else{
@@ -64,15 +62,6 @@ function getMovieId(ID){ //getting the movie ID
         }).catch((error)=>{
             console.log(error);
         })
-
-       /* const recommendation_URL = `https://api.themoviedb.org/3/movie/${Id}/recommendations?api_key=${API_key}&language=en-US&page=1`
-        fetch(recommendation_URL).then((recom)=>recom.json())
-        .then((data)=>{
-            getRecomData(data.results)
-            
-        }).catch((error)=>{
-            console.log(error);
-        })*/
 
         const genresURL = `https://api.themoviedb.org/3/movie/${Id}?api_key=${API_key}&language=en-US`
         fetch(genresURL).then((res) => res.json())
@@ -159,7 +148,6 @@ function showMovieInfo (movie){
     <div>
         <div class ="overview-img">
             <img class="desktop-img" src="${image_path + movie.poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <img class="mobile-img" src="${image_path + movie.backdrop_path}">
         </div>
 
         <div class="movie-rating">
@@ -238,91 +226,58 @@ function getCast(cast){
 /* ========== Movie Cast List END  ========== */
 
 
-
-/* ========== Movie Recommendation List ========== */
-/*function getRecomData(recomData){
-
-    recommendContainer.innerHTML = "";
-    recomData.forEach((recomDatas) =>{
-        const { poster_path, title, vote_coount} = recomDatas;
-
-        const recommendation_list = document.createElement("div");
-        recommendation_list.classList.add("swiper-slide");
-
-        recommendation_list.innerHTML = `
-        
-            <img class="recommendation-img" src="${image_path + poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <h4 class="recommendation-title">${title}</h4>
-            `
-
-        recommendation_list.addEventListener('click', function(){
-        loadingAnimation(recomDatas);
-            getMovieId(recomDatas.id);
-        
-        })
-
-        recommendContainer.appendChild(recommendation_list);
-        
-    })
-}*/
-/* ========== Movie Recommendation List END ========== */
-
-
-
-
-
 /* ========== Closed Modal ========== */
 movieInfoContent.style.display = 'none' //Default hidden on page load
 
 btnClosed.addEventListener("click", function(){
-if(movieInfoContent.style.display !== 'none'){
-    movieInfoContent.style.display = 'none';
-} else{
-    movieInfoContent.style.display = 'block';
-}
+    if(movieInfoContent.style.display !== 'none'){
+        movieInfoContent.style.display = 'none';
+    } else{
+        movieInfoContent.style.display = 'block';
+    }
 })
 
 
 btnTrailerClosed.addEventListener("click", function(){
 
-trailerContainer.style.display = "none";
+    trailerContainer.style.display = "none";
 
-$("iframe").each(function(){
-    var src = $(this).attr('src');
-    $(this).attr('src', src);
-})
+    $("iframe").each(function(){
+        var src = $(this).attr('src');
+        $(this).attr('src', src);
+    })
 
 })
 
 headerMovieList.style.display = 'none' //Default hidden on page load
 
 dropdownMovie.addEventListener("click", function(event){
-event.preventDefault();
-if(headerMovieList.style.display !== 'none'){
-    headerMovieList.style.display = 'none';
-} else{
-    headerMovieList.style.display = 'block';
-}
+    event.preventDefault();
+    if(headerMovieList.style.display !== 'none'){
+        headerMovieList.style.display = 'none';
+    } else{
+        headerMovieList.style.display = 'block';
+    }
 })
 
 headerTVList.style.display = 'none' //Default hidden on page load
 
 dropdownTv.addEventListener("click", function(event){
-event.preventDefault();
-if(headerTVList.style.display !== 'none'){
-    headerTVList.style.display = 'none';
-} else{
-    headerTVList.style.display = 'block';
-}
+    event.preventDefault();
+    if(headerTVList.style.display !== 'none'){
+        headerTVList.style.display = 'none';
+    } else{
+        headerTVList.style.display = 'block';
+    }
 })
 
 headerPeopleList.style.display = 'none' //Default hidden on page load
 
 dropdownPeople.addEventListener("click", function(event){
-event.preventDefault();
-if(headerPeopleList.style.display !== 'none'){
-    headerPeopleList.style.display = 'none';
-} else{
-    headerPeopleList.style.display = 'block';
-}
+    event.preventDefault();
+    if(headerPeopleList.style.display !== 'none'){
+        headerPeopleList.style.display = 'none';
+    } else{
+        headerPeopleList.style.display = 'block';
+    }
 })

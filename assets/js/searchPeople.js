@@ -1,10 +1,8 @@
-import API_KEY from './config.js'
+const  actor = localStorage.getItem("Celebrity");
+import API_KEY from "./config.js"
 const API_key = API_KEY
+
 const image_path = "https://image.tmdb.org/t/p/w1280";
-const movieContainer = document.getElementById("movies-container");
-const movieInfoContent = document.getElementById("movie-info")
-const movieDetails = document.getElementById("movie-details");
-const search = document.getElementById("search-movies");
 const castContainer = document.getElementById("cast-list");
 const dropdownMovie = document.getElementById("dropdown-btn");
 const headerMovieList = document.getElementById("dropdown-content")
@@ -12,56 +10,30 @@ const dropdownTv = document.getElementById("dropdown-btn-tv")
 const headerTVList = document.getElementById("tv-dropdown-content")
 const dropdownPeople = document.getElementById("dropdown-btn-people")
 const headerPeopleList = document.getElementById("people-dropdown-content")
+const movieContainer = document.getElementById("movies-container");
+const movieInfoContent = document.getElementById("movie-info")
+const movieDetails = document.getElementById("movie-details");
 const btnClosed = document.getElementById("btn-closed");
-
-let page = 1;
-
-window.onscroll = infiniteScroll;
-
-    // This variable is used to remember if the function was executed.
-    var isExecuted = false;
-
-    function infiniteScroll() {
-        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
-        if (window.scrollY > (document.body.offsetHeight - window.outerHeight) && !isExecuted) {
-            // Set "isExecuted" to "true" to prevent further execution
-            isExecuted = true;
-
-            // Your code goes here
-            showLoadingBar();
-
-            // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
-            setTimeout(() => {
-                isExecuted = false;
-            }, 1000);
-        }
-    }
-
-
-function showLoadingBar() { //infinite scrolling animation
-    setTimeout(getActors, 1500)
-    page++;
-}
+const search = document.getElementById("search-movies");
 
 
 
-getActors().catch(error => {
+getCelebrity().catch(error => {
     console.log(error);
 }); ;
 
 
-async function getActors(){
- 
-    const response  = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${API_key}&language=en-US&page=${page}`);
+async function getCelebrity(){
+    movieContainer.innerHTML = "";
+    const response  = await fetch(`https://api.themoviedb.org/3/search/person?api_key=${API_key}&language=en-US&query=${actor}&page=1&include_adult=false`);
+    console.log(response)
     const Moviedata = await response.json();
 
-    //console.log(Moviedata.results[0].original_title);
-
-    showActorInfo(Moviedata.results);   
+    showCelebrity(Moviedata.results)
     //movies = await response.json();
 }
 
-/* ========== Movie Search ========== */ 
+/* ========== Celebrity Search ========== */ 
 $('.form').submit(function(event){    
     const searchMovies = search.value;
     console.log("Submit")
@@ -76,8 +48,58 @@ $('.form').submit(function(event){
     event.preventDefault();
 })
 
-/* ========== Movie Search END ========== */ 
+function showCelebrity(person){
 
+    person.forEach((persons) => {
+        const { profile_path, name, popularity} = persons; 
+        
+        const movieEL = document.createElement("div");
+        movieEL.classList.add("movies-list");
+    
+        movieEL.innerHTML = 
+         `<img src="${image_path + profile_path}" alt=${name} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+         
+         <div class="movie-title">
+         <h3>${name}</h3>
+    
+         <p class="ratings">${parseInt(popularity.toString().replace('.', ''))}<span class="percent">%</span></p>
+         </div>
+         `;
+      
+         movieEL.addEventListener("click", () =>{
+            showActorMovieInfo(persons)// it will pass the movie details
+            getKnownFor(persons.known_for);
+            getMovieId(persons.id)
+            movieInfoContent.style.display = "block";
+           //console.log(movie.title)
+    
+       });
+    
+         movieContainer.appendChild(movieEL);
+    
+        
+    });
+}
+
+
+/* ========== Celebrity List ========== */
+function showActorMovieInfo (persons){
+    movieDetails.innerHTML = (`
+        <div class ="overview-img">
+        <img class="desktop-img" src="${image_path + persons.profile_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+
+
+        </div>
+        <div class="overview-text">
+        <h2 class="movie-title">${persons.name}</h2>
+
+        <div class="overview-details" id="overview-details">
+
+        </div>
+
+        `);
+}
+/* ========== Celebrity  List END  ========== */
 
 function getKnownFor(known_for){
 
@@ -145,66 +167,6 @@ function actorMovieList(movieList){
 
 
 
-function showActorInfo(movies){
-
-    movies.forEach((movie) => {
-        const { profile_path, name, id} = movie;       
-        const movieEL = document.createElement("div");
-        movieEL.classList.add("movies-list");
-
-        movieEL.innerHTML = 
-         `<img src="${image_path + profile_path}" alt=${name} onerror="this.src = '/assets/img/poster-placeholder.svg'">
-         
-         <div class="movie-title">
-         <h3>${name}</h3>
-         </div>
-         `;
-
-         movieEL.addEventListener("click", () =>{
-            showActorMovieInfo(movie)// it will pass the movie details
-            getKnownFor(movie.known_for);
-            getMovieId(movie.id)
-            //getMovieId(movie.id)//it will pass the movie ID for the trailer
-            movieInfoContent.style.display = "block";
-           //console.log(movie.title)
-
-       });
-
-         movieContainer.appendChild(movieEL);
-
-        
-    });
-}
-
-
-
-function showActorMovieInfo (movie){
-
-            movieDetails.innerHTML = (`
-        <div class ="overview-img">
-        <img class="desktop-img" src="${image_path + movie.profile_path}">
-
-
-        </div>
-        <div class="overview-text">
-        <h2 class="movie-title">${movie.name}</h2>
-    
-        <div class="overview-details" id="overview-details">
-        
-        </div>
-        
-        `);
-
- 
-}
-
-
-
-
-
-
-
-
 movieInfoContent.style.display = 'none' //Default hidden on page load
 
 btnClosed.addEventListener("click", function(){
@@ -248,6 +210,3 @@ dropdownPeople.addEventListener("click", function(event){
         headerPeopleList.style.display = 'block';
     }
 })
-
-
-
