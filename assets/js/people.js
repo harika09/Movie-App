@@ -13,8 +13,12 @@ const headerTVList = document.getElementById("tv-dropdown-content")
 const dropdownPeople = document.getElementById("dropdown-btn-people")
 const headerPeopleList = document.getElementById("people-dropdown-content")
 const btnClosed = document.getElementById("btn-closed");
-
+const spinner = document.querySelector('.spinner');
 let page = 1;
+
+
+
+/* ========== Movie Pagination Infinite Scroll ========== */ 
 
 window.onscroll = infiniteScroll;
 
@@ -37,12 +41,11 @@ window.onscroll = infiniteScroll;
         }
     }
 
-
 function showLoadingBar() { //infinite scrolling animation
+    spinner.classList.add('show');
     setTimeout(getActors, 1500)
     page++;
 }
-
 
 
 getActors().catch(error => {

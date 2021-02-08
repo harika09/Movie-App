@@ -20,11 +20,15 @@ const headerPeopleList = document.getElementById("people-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
+const spinner = document.querySelector('.spinner');
 
 let movieArray = [];
 let page = 1;
 
+
+
 /* ========== Movie Pagination Infinite Scroll ========== */ 
+
 window.onscroll = infiniteScroll;
 
     // This variable is used to remember if the function was executed.
@@ -46,10 +50,9 @@ window.onscroll = infiniteScroll;
         }
     }
 
-
-
 function showLoadingBar() { //infinite scrolling animation
-    setTimeout(getMovies, 1000)
+    spinner.classList.add('show');
+    setTimeout(getMovies, 1500)
     page++;
 }
 

@@ -18,6 +18,7 @@ const dropdownPeople = document.getElementById("dropdown-btn-people")
 const headerPeopleList = document.getElementById("people-dropdown-content")
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
+const spinner = document.querySelector('.spinner');
 
 let movieArray = [];
 let page = 1;
@@ -48,6 +49,7 @@ window.onscroll = infiniteScroll;
     }
 
 function showLoadingBar() { //infinite scrolling animation
+    spinner.classList.add('show');
     setTimeout(getMovies, 1500)
     page++;
 }

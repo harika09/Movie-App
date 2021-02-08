@@ -19,9 +19,12 @@ const headerPeopleList = document.getElementById("people-dropdown-content")
 const castContainer = document.getElementById("cast-list");
 const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
+const spinner = document.querySelector('.spinner');
 
 let movieArray = [];
 let page = 1;
+
+
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
 
@@ -46,9 +49,9 @@ window.onscroll = infiniteScroll;
         }
     }
 
-
 function showLoadingBar() { //infinite scrolling animation
-    setTimeout(getTv, 1000)
+    spinner.classList.add('show');
+    setTimeout(getTv, 1500)
     page++;
 }
 

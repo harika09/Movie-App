@@ -479,11 +479,16 @@ body {
   }
 
   .spinner {
+    opacity: 0;
     margin: 50px auto;
     width: 50px;
     height: 40px;
     text-align: center;
     font-size: 10px;
+
+    &.show {
+      opacity: 1;
+    }
 
     & > div {
       background-color: $White;
