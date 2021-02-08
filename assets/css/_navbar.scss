@@ -97,6 +97,17 @@
       overflow: hidden;
       margin-top: 5px;
 
+      &.dropdown-active .dropdown-content {
+        display: block;
+      }
+
+      &.dropdown-active .tv-dropdown-content {
+        display: block;
+      }
+      &.dropdown-active .people-dropdown-content {
+        display: block;
+      }
+
       @include tablet {
         & {
           float: none;

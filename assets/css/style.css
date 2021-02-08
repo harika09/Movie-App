@@ -84,6 +84,21 @@
   overflow: hidden;
   margin-top: 5px;
 }
+.header-nav-menu .dropdown.dropdown-active .dropdown-content,
+.header-nav-menu .tv-dropdown.dropdown-active .dropdown-content,
+.header-nav-menu .people-dropdown.dropdown-active .dropdown-content {
+  display: block;
+}
+.header-nav-menu .dropdown.dropdown-active .tv-dropdown-content,
+.header-nav-menu .tv-dropdown.dropdown-active .tv-dropdown-content,
+.header-nav-menu .people-dropdown.dropdown-active .tv-dropdown-content {
+  display: block;
+}
+.header-nav-menu .dropdown.dropdown-active .people-dropdown-content,
+.header-nav-menu .tv-dropdown.dropdown-active .people-dropdown-content,
+.header-nav-menu .people-dropdown.dropdown-active .people-dropdown-content {
+  display: block;
+}
 @media screen and (max-width: 900px) {
   .header-nav-menu .dropdown,
 .header-nav-menu .tv-dropdown,
