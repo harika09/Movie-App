@@ -33,8 +33,11 @@ window.onscroll = infiniteScroll;
             // Set "isExecuted" to "true" to prevent further execution
             isExecuted = true;
 
-            // Your code goes here
+           if(page === 42){
+               disableScrolling()
+           }else{
             showLoadingBar();
+           }
 
             // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
             setTimeout(() => {
@@ -47,6 +50,12 @@ function showLoadingBar() { //infinite scrolling animation
     spinner.classList.add('show');
     setTimeout(getMovies, 1500)
     page++;
+}
+
+function disableScrolling(){
+    var offset = $(window).scrollTop();
+    if(offset >= 100) $(window).off('scroll'); 
+    spinner.classList.remove('show');
 }
 
 /* ========== Movie Pagination Infinite Scroll END ========== */ 

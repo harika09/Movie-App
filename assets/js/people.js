@@ -13,7 +13,6 @@ let page = 1;
 
 
 /* ========== Movie Pagination Infinite Scroll ========== */ 
-
 window.onscroll = infiniteScroll;
 
     // This variable is used to remember if the function was executed.
@@ -25,8 +24,11 @@ window.onscroll = infiniteScroll;
             // Set "isExecuted" to "true" to prevent further execution
             isExecuted = true;
 
-            // Your code goes here
+           if(page === 500){
+               disableScrolling()
+           }else{
             showLoadingBar();
+           }
 
             // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
             setTimeout(() => {
@@ -39,6 +41,14 @@ function showLoadingBar() { //infinite scrolling animation
     spinner.classList.add('show');
     setTimeout(getActors, 1500)
     page++;
+}
+
+function disableScrolling(){
+    var offset = $(window).scrollTop();
+    console.log(page);
+    //console.log("page Y-Offset: ", offset); // just to see it working
+    if(offset >= 100) $(window).off('scroll'); 
+    spinner.classList.remove('show');
 }
 
 
