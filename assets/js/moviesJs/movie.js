@@ -47,7 +47,7 @@ window.onscroll = infiniteScroll;
 
 function showLoadingBar() { //infinite scrolling animation
     spinner.classList.add('show');
-    setTimeout(getMovies, 1500)
+    setTimeout(getMovies)
     page++;
 }
 
