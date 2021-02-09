@@ -4,6 +4,7 @@ Link: https://movie-app-list.netlify.app/
 
 
 <h2>Features</h2>
+
 Movies
   - Popular Movies
   - Upcoming Movies
