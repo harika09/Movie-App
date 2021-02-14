@@ -11,6 +11,7 @@ const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
 const search = document.getElementById("search-movies");
 const btnClosed = document.getElementById("btn-closed");
+
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
 
@@ -19,20 +20,29 @@ getMovies().catch(error => {
 }); ;
 
 
+
 async function getMovies(){
     movieContainer.innerHTML = "";
     const response  = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_key}&query=` + movieTitle);
-    console.log(response)
     const Moviedata = await response.json();
+    if(Moviedata.results.length === 0){
+        noDataFound();
+    } else{
+        showMovies(Moviedata.results);
+        $(".main-container .searchTitle").html(`Results Found For "${movieTitle}"`)
+    }
+   
+}
 
-
-    showMovies(Moviedata.results)
+function noDataFound(){
+    $(".main-container .no-data").addClass('show');
+    $(".no-data.show").html(`No Results Found For "${movieTitle}"`);
 }
 
 /* ========== Movie Search ========== */ 
 $('.form').submit(function(event){    
     const searchMovies = search.value;
-    console.log(searchMovies)
+   
  if(searchMovies == ""){
       alert('field is empty')
     }else{
@@ -106,35 +116,35 @@ function showTrailer(key){
 /* ========== Movie Information List ========== */ 
 function showMovies(movies){
 
-movies.forEach((movie) => {
-    const { poster_path, title, vote_average} = movie; 
+    movies.forEach((movie) => {
+        const { poster_path, title, vote_average} = movie; 
+        
+        const movieEL = document.createElement("div");
+        movieEL.classList.add("movies-list");
+
+        movieEL.innerHTML = 
+        `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+        
+        <div class="movie-title">
+        <h3>${title}</h3>
+
+        <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
+        </div>
+        `;
     
-    const movieEL = document.createElement("div");
-    movieEL.classList.add("movies-list");
+        movieEL.addEventListener("click", () =>{
+            showMovieInfo(movie)// it will pass the movie details
+            getMovieId(movie.id)//it will pass the movie ID for the trailer
+            //console.log(movie.id);
+            movieInfoContent.style.display = "block";
+        //console.log(movie.title)
 
-    movieEL.innerHTML = 
-     `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-     
-     <div class="movie-title">
-     <h3>${title}</h3>
+    });
 
-     <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
-     </div>
-     `;
-  
-     movieEL.addEventListener("click", () =>{
-        showMovieInfo(movie)// it will pass the movie details
-        getMovieId(movie.id)//it will pass the movie ID for the trailer
-        //console.log(movie.id);
-        movieInfoContent.style.display = "block";
-       //console.log(movie.title)
+        movieContainer.appendChild(movieEL);
 
-   });
-
-     movieContainer.appendChild(movieEL);
-
-    
-});
+        
+    });
 }
 
 function showMovieInfo (movie){

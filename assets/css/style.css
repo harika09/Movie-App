@@ -270,6 +270,14 @@ body {
   outline: none;
   border: 1px solid #0f0f0f;
 }
+.main-container .no-data {
+  display: none;
+}
+.main-container .no-data.show {
+  display: block;
+  font-size: 3rem;
+  text-align: center;
+}
 .main-container h1 {
   color: #ffff;
   padding-top: 90px;

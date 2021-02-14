@@ -15,17 +15,27 @@ const btnClosed = document.getElementById("btn-closed");
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
 
-getMovies().catch(error => {
+getTV().catch(error => {
     console.log(error);
 }); ;
 
 
-async function getMovies(){
+async function getTV(){
     tvContainer.innerHTML = "";
     const response  = await fetch(`https://api.themoviedb.org/3/search/tv?api_key=${API_key}&language=en-US&page=1&query=${tvTitle}&include_adult=false`);
     const Moviedata = await response.json();
+    if(Moviedata.results.length === 0){
+        noDataFound();
+    } else{
+        showTv(Moviedata.results);
+        $(".main-container .searchTitle").html(`Results Found For "${tvTitle}"`)
+    }
+   
+}
 
-    showTv(Moviedata.results)
+function noDataFound(){
+    $(".main-container .no-data").addClass('show');
+    $(".no-data.show").html(`No Results Found For "${tvTitle}"`);
 }
 
 function loadingAnimation(recomDatas){

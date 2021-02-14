@@ -59,6 +59,16 @@ body {
     }
   }
 
+  .no-data {
+    display: none;
+
+    &.show {
+      display: block;
+      font-size: 3rem;
+      text-align: center;
+    }
+  }
+
   h1 {
     color: $White;
     padding-top: 90px;

@@ -20,11 +20,19 @@ getCelebrity().catch(error => {
 async function getCelebrity(){
     movieContainer.innerHTML = "";
     const response  = await fetch(`https://api.themoviedb.org/3/search/person?api_key=${API_key}&language=en-US&query=${actor}&page=1&include_adult=false`);
-    console.log(response)
     const Moviedata = await response.json();
 
-    showCelebrity(Moviedata.results)
-    //movies = await response.json();
+    if(Moviedata.results.length === 0){
+        noDataFound();
+    } else{
+        showCelebrity(Moviedata.results)
+        $(".main-container .searchTitle").html(`Results Found For "${actor}"`)
+    }
+}
+
+function noDataFound(){
+    $(".main-container .no-data").addClass('show');
+    $(".no-data.show").html(`No Results Found For "${actor}"`);
 }
 
 /* ========== Celebrity Search ========== */ 
