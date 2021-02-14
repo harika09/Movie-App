@@ -278,6 +278,11 @@ body {
   font-size: 3rem;
   text-align: center;
 }
+@media screen and (max-width: 600px) {
+  .main-container .no-data.show {
+    font-size: 1.5rem;
+  }
+}
 .main-container h1 {
   color: #ffff;
   padding-top: 90px;
