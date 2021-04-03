@@ -26,16 +26,25 @@ window.addEventListener("scroll", function(){
 });
 
 movie.addEventListener("click", function(){
-    movie.classList.toggle("dropdown-active")
+    if(movie.classList.toggle("dropdown-active")){
+        tv.classList.remove('dropdown-active')
+        people.classList.remove('dropdown-active')
+    }
 
 })
 
 tv.addEventListener("click", function(){
-    tv.classList.toggle("dropdown-active")
+    if(tv.classList.toggle("dropdown-active")){
+        movie.classList.remove('dropdown-active')
+        people.classList.remove('dropdown-active')
+    }
 })
 
 people.addEventListener("click", function(){
-    people.classList.toggle("dropdown-active")
+    if(people.classList.toggle("dropdown-active")){
+        movie.classList.remove('dropdown-active')
+        tv.classList.remove('dropdown-active')
+    }
 })
 
 

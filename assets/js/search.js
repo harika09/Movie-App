@@ -22,7 +22,7 @@ getMovies().catch(error => {
 
 
 async function getMovies(){
-    movieContainer.innerHTML = "";
+    movieContainer.innerHTML = ""; //empty movieContainer to reload
     const response  = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_key}&query=` + movieTitle);
     const Moviedata = await response.json();
     if(Moviedata.results.length === 0){

@@ -101,12 +101,13 @@ async function getMovies(){
 /* ========== Movie ID ========== */ 
 function getMovieId(ID){ //getting the movie ID
     const Id = ID;
-    const trailerURL = ` https://api.themoviedb.org/3/movie/${Id}/videos?api_key=${API_key}&language=en-US`
+    console.log(Id)
+    const trailerURL = `https://api.themoviedb.org/3/movie/${Id}/videos?api_key=${API_key}&language=en-US`
 
     fetch(trailerURL).then((res) => res.json())
     .then((data) =>{
-        showTrailer(data.results[0].key); //getting the first key to be linked on youtube
-        
+        showTrailer(data.results[0].key)
+
     }).catch((error)=>{
         console.log(error);
     })
