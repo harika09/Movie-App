@@ -1,11 +1,11 @@
-const  movieTitle = localStorage.getItem("Movie Name");
-import API_KEY from "./config.js"
-const API_key = API_KEY
+const movieTitle = localStorage.getItem("Movie Name");
+import API_KEY from "./config.js";
+const API_key = API_KEY;
 
 const image_path = "https://image.tmdb.org/t/p/w1280";
 const castContainer = document.getElementById("cast-list");
 const movieContainer = document.getElementById("movies-container");
-const movieInfoContent = document.getElementById("movie-info")
+const movieInfoContent = document.getElementById("movie-info");
 const movieDetails = document.getElementById("movie-details");
 const trailerContainer = document.getElementById("trailer");
 const trailer = document.getElementById("trailer-youtube");
@@ -14,155 +14,161 @@ const btnClosed = document.getElementById("btn-closed");
 
 const btnTrailerClosed = document.getElementById("btn-trailer-closed");
 
+getMovies().catch((error) => {
+  // console.log(error);
+});
 
-getMovies().catch(error => {
-    console.log(error);
-}); ;
-
-
-
-async function getMovies(){
-    movieContainer.innerHTML = ""; //empty movieContainer to reload
-    const response  = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_key}&query=` + movieTitle);
-    const Moviedata = await response.json();
-    if(Moviedata.results.length === 0){
-        noDataFound();
-    } else{
-        showMovies(Moviedata.results);
-        $(".main-container .searchTitle").html(`Results Found For "${movieTitle}"`)
-    }
-   
+async function getMovies() {
+  movieContainer.innerHTML = ""; //empty movieContainer to reload
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_key}&query=` +
+      movieTitle
+  );
+  const Moviedata = await response.json();
+  if (Moviedata.results.length === 0) {
+    noDataFound();
+  } else {
+    showMovies(Moviedata.results);
+    $(".main-container .searchTitle").html(`Results Found For "${movieTitle}"`);
+  }
 }
 
-function noDataFound(){
-    $(".main-container .no-data").addClass('show');
-    $(".no-data.show").html(`No Results Found For "${movieTitle}"`);
+function noDataFound() {
+  $(".main-container .no-data").addClass("show");
+  $(".no-data.show").html(`No Results Found For "${movieTitle}"`);
 }
 
-/* ========== Movie Search ========== */ 
-$('.form').submit(function(event){    
-    const searchMovies = search.value;
-   
- if(searchMovies == ""){
-      alert('field is empty')
-    }else{
-        location.replace("/assets/movies/search.html");
-        localStorage.setItem("Movie Name", searchMovies);
-       
-    }
-    event.preventDefault();
-})
+/* ========== Movie Search ========== */
+$(".form").submit(function (event) {
+  const searchMovies = search.value;
 
-/* ========== Movie Search END ========== */ 
+  if (searchMovies == "") {
+    alert("field is empty");
+  } else {
+    location.replace("/assets/movies/search.html");
+    localStorage.setItem("Movie Name", searchMovies);
+  }
+  event.preventDefault();
+});
 
-/* ========== Movie ID ========== */ 
-function getMovieId(ID){ //getting the movie ID
-        const Id = ID;
-        const trailerURL = ` https://api.themoviedb.org/3/movie/${Id}/videos?api_key=${API_key}&language=en-US`
+/* ========== Movie Search END ========== */
 
-        fetch(trailerURL).then((res) => res.json())
-        .then((data) =>{
-            showTrailer(data.results[0].key); //getting the first key to be linked on youtube
-            
-        }).catch((error)=>{
-            console.log(error);
-        })
+/* ========== Movie ID ========== */
+function getMovieId(ID) {
+  //getting the movie ID
+  const Id = ID;
+  const trailerURL = ` https://api.themoviedb.org/3/movie/${Id}/videos?api_key=${API_key}&language=en-US`;
 
-        const genresURL = `https://api.themoviedb.org/3/movie/${Id}?api_key=${API_key}&language=en-US`
-        fetch(genresURL).then((res) => res.json())
-        .then((data) =>{
-            getData(data.genres)
-        }).catch((error)=>{
-            console.log(error);
-        })
+  fetch(trailerURL)
+    .then((res) => res.json())
+    .then((data) => {
+      showTrailer(data.results[0].key); //getting the first key to be linked on youtube
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 
-        const cast_URL = `https://api.themoviedb.org/3/movie/${Id}/credits?api_key=${API_key}&language=en-US`;
-        fetch(cast_URL).then((casts)=>casts.json())
-        .then((data)=>{
-            getCast(data.cast);
-        }).catch((error)=>{
-            console.log(error);
-        });
+  const genresURL = `https://api.themoviedb.org/3/movie/${Id}?api_key=${API_key}&language=en-US`;
+  fetch(genresURL)
+    .then((res) => res.json())
+    .then((data) => {
+      getData(data.genres);
+    })
+    .catch((error) => {
+      // console.log(error);
+    });
+
+  const cast_URL = `https://api.themoviedb.org/3/movie/${Id}/credits?api_key=${API_key}&language=en-US`;
+  fetch(cast_URL)
+    .then((casts) => casts.json())
+    .then((data) => {
+      getCast(data.cast);
+    })
+    .catch((error) => {
+      // console.log(error);
+    });
 }
-/* ========== Movie ID END ========== */ 
+/* ========== Movie ID END ========== */
 
-/* ========== Movie Trailer ========== */ 
-function showTrailer(key){
-    const keys = key
-    const btnTrailer = document.getElementById("btn-trailer");
-    const youtubeURL = "https://www.youtube.com/embed/";
-    //console.log("Movie: " + youtubeURL + key);
+/* ========== Movie Trailer ========== */
+function showTrailer(key) {
+  const keys = key;
+  const btnTrailer = document.getElementById("btn-trailer");
+  const youtubeURL = "https://www.youtube.com/embed/";
+  //console.log("Movie: " + youtubeURL + key);
 
+  trailerContainer.style.display = "none";
 
-    trailerContainer.style.display = 'none';
-
-    btnTrailer.addEventListener("click", function(){
-    if(trailerContainer.style.display !== 'none'){
-        trailerContainer.style.display = 'none';
-        
-    } else{
-        trailerContainer.style.display = 'block'; 
-        trailer.innerHTML =`
-        <iframe class="video-trailer" id="video-trailer" src="${youtubeURL+keys}" frameborder="0" allowfullscreen>
+  btnTrailer.addEventListener("click", function () {
+    if (trailerContainer.style.display !== "none") {
+      trailerContainer.style.display = "none";
+    } else {
+      trailerContainer.style.display = "block";
+      trailer.innerHTML = `
+        <iframe class="video-trailer" id="video-trailer" src="${
+          youtubeURL + keys
+        }" frameborder="0" allowfullscreen>
         </iframe> 
-        `; 
+        `;
     }
-})
-
+  });
 }
-/* ========== Movie Trailer END ========== */ 
+/* ========== Movie Trailer END ========== */
 
+/* ========== Movie Information List ========== */
+function showMovies(movies) {
+  movies.forEach((movie) => {
+    const { poster_path, title, vote_average } = movie;
 
-/* ========== Movie Information List ========== */ 
-function showMovies(movies){
+    const movieEL = document.createElement("div");
+    movieEL.classList.add("movies-list");
 
-    movies.forEach((movie) => {
-        const { poster_path, title, vote_average} = movie; 
-        
-        const movieEL = document.createElement("div");
-        movieEL.classList.add("movies-list");
-
-        movieEL.innerHTML = 
-        `<img src="${image_path + poster_path}" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+    movieEL.innerHTML = `<img src="${
+      image_path + poster_path
+    }" alt=${title} id="poster" onerror="this.src = '/assets/img/poster-placeholder.svg'">
         
         <div class="movie-title">
         <h3>${title}</h3>
 
-        <p class="ratings">${parseInt(vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
+        <p class="ratings">${parseInt(
+          vote_average.toString().replace(".", "")
+        )}<span class="percent">%</span></p>
         </div>
         `;
-    
-        movieEL.addEventListener("click", () =>{
-            showMovieInfo(movie)// it will pass the movie details
-            getMovieId(movie.id)//it will pass the movie ID for the trailer
-            //console.log(movie.id);
-            movieInfoContent.style.display = "block";
-        //console.log(movie.title)
 
+    movieEL.addEventListener("click", () => {
+      showMovieInfo(movie); // it will pass the movie details
+      getMovieId(movie.id); //it will pass the movie ID for the trailer
+      //console.log(movie.id);
+      movieInfoContent.style.display = "block";
+      //console.log(movie.title)
     });
 
-        movieContainer.appendChild(movieEL);
-
-        
-    });
+    movieContainer.appendChild(movieEL);
+  });
 }
 
-function showMovieInfo (movie){
-
-    movieDetails.innerHTML = (`
+function showMovieInfo(movie) {
+  movieDetails.innerHTML = `
     <div>
         <div class ="overview-img">
-            <img class="desktop-img" src="${image_path + movie.poster_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+            <img class="desktop-img" src="${
+              image_path + movie.poster_path
+            }" onerror="this.src = '/assets/img/poster-placeholder.svg'">
         </div>
 
         <div class="movie-rating">
             <h2 class="movie-title">${movie.title}</h2>
-            <p class="ratings">${parseInt(movie.vote_average.toString().replace('.', ''))}<span class="percent">%</span></p>
+            <p class="ratings">${parseInt(
+              movie.vote_average.toString().replace(".", "")
+            )}<span class="percent">%</span></p>
         </div>
 
         <div class="movie-release-container">
             <div class="movie-date">
-                    <p>Release Date: ${movie.release_date.replace("-","/").replace("-","/")}</p>
+                    <p>Release Date: ${movie.release_date
+                      .replace("-", "/")
+                      .replace("-", "/")}</p>
             </div>
 
             <div class="movie-genres" id="movie-genres">
@@ -176,80 +182,75 @@ function showMovieInfo (movie){
             
         </div>
 
-        <p class="movie-overview"><span>Overview:</span> <br> ${movie.overview}</p>
+        <p class="movie-overview"><span>Overview:</span> <br> ${
+          movie.overview
+        }</p>
 </div>
 
 
-`);
-
-
+`;
 }
 
-/* ========== Movie Information List END ========== */ 
+/* ========== Movie Information List END ========== */
 
-
-
-/* ========== Movie Genres List ========== */ 
-function getData(data){
-    const movie_genres = document.getElementById("movie-genres");
-    movie_genres.innerHTML = "";
-    data.forEach((genres) => {
-        const { name } = genres; 
-        const movieGenres = document.createElement("div");
-        movieGenres.classList.add("genres-list");
-        movieGenres.innerHTML = `
+/* ========== Movie Genres List ========== */
+function getData(data) {
+  const movie_genres = document.getElementById("movie-genres");
+  movie_genres.innerHTML = "";
+  data.forEach((genres) => {
+    const { name } = genres;
+    const movieGenres = document.createElement("div");
+    movieGenres.classList.add("genres-list");
+    movieGenres.innerHTML = `
         <div class="movie-genres">
             <p>${name}<span>.</span></p>
         </div>
         `;
-        movie_genres.appendChild(movieGenres);        
-    });
+    movie_genres.appendChild(movieGenres);
+  });
 }
-/* ========== Movie Genres List END ========== */ 
-
+/* ========== Movie Genres List END ========== */
 
 /* ========== Movie Cast List ========== */
-function getCast(cast){
-    castContainer.innerHTML = "";
-    cast.forEach((casts) =>{
-        const { name, profile_path} = casts;
+function getCast(cast) {
+  castContainer.innerHTML = "";
+  cast.forEach((casts) => {
+    const { name, profile_path } = casts;
 
-        const castList = document.createElement("div");
-        castList.classList.add("swiper-slide");
+    const castList = document.createElement("div");
+    castList.classList.add("swiper-slide");
 
-        castList.innerHTML = `
+    castList.innerHTML = `
 
-            <img class="actor-img" src="${image_path + profile_path}" onerror="this.src = '/assets/img/poster-placeholder.svg'">
+            <img class="actor-img" src="${
+              image_path + profile_path
+            }" onerror="this.src = '/assets/img/poster-placeholder.svg'">
             <h4 class="actor-name">${name}</h4>
-        `
+        `;
 
-        castContainer.appendChild(castList);
+    castContainer.appendChild(castList);
 
-        $(".cast-list .swiper-slide").slice(10).remove() // display only 10 div
-    })
+    $(".cast-list .swiper-slide").slice(10).remove(); // display only 10 div
+  });
 }
 /* ========== Movie Cast List END  ========== */
 
-
 /* ========== Closed Modal ========== */
-movieInfoContent.style.display = 'none' //Default hidden on page load
+movieInfoContent.style.display = "none"; //Default hidden on page load
 
-btnClosed.addEventListener("click", function(){
-    if(movieInfoContent.style.display !== 'none'){
-        movieInfoContent.style.display = 'none';
-    } else{
-        movieInfoContent.style.display = 'block';
-    }
-})
+btnClosed.addEventListener("click", function () {
+  if (movieInfoContent.style.display !== "none") {
+    movieInfoContent.style.display = "none";
+  } else {
+    movieInfoContent.style.display = "block";
+  }
+});
 
+btnTrailerClosed.addEventListener("click", function () {
+  trailerContainer.style.display = "none";
 
-btnTrailerClosed.addEventListener("click", function(){
-
-    trailerContainer.style.display = "none";
-
-    $("iframe").each(function(){
-        var src = $(this).attr('src');
-        $(this).attr('src', src);
-    })
-
-})
+  $("iframe").each(function () {
+    var src = $(this).attr("src");
+    $(this).attr("src", src);
+  });
+});
