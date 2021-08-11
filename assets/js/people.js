@@ -136,7 +136,7 @@ function actorMovieList(movieList) {
             <img class="actor-img" src="${
               image_path + poster_path
             }" onerror="this.src = '/assets/img/poster-placeholder.svg'">
-            <h4>${title}</h4>
+            <!-- <h4>${title}</h4> --->
         `;
 
     castContainer.appendChild(castList);
