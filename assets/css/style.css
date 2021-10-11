@@ -314,7 +314,7 @@ body {
 }
 @media screen and (max-width: 600px) {
   .main-container .movie-container .movies-list {
-    width: 165px;
+    width: 115px;
   }
 }
 .main-container .movie-container .movies-list .movie-title {
