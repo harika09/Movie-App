@@ -101,8 +101,8 @@
 }
 @media screen and (max-width: 900px) {
   .header-nav-menu .dropdown,
-.header-nav-menu .tv-dropdown,
-.header-nav-menu .people-dropdown {
+  .header-nav-menu .tv-dropdown,
+  .header-nav-menu .people-dropdown {
     float: none;
   }
 }
@@ -141,11 +141,11 @@
 }
 @media screen and (max-width: 900px) {
   .header-nav-menu .dropdown-content,
-.header-nav-menu .dropdown .tv-dropdown-content,
-.header-nav-menu .tv-dropdown-content,
-.header-nav-menu .tv-dropdown .tv-dropdown-content,
-.header-nav-menu .people-dropdown-content,
-.header-nav-menu .people-dropdown .tv-dropdown-content {
+  .header-nav-menu .dropdown .tv-dropdown-content,
+  .header-nav-menu .tv-dropdown-content,
+  .header-nav-menu .tv-dropdown .tv-dropdown-content,
+  .header-nav-menu .people-dropdown-content,
+  .header-nav-menu .people-dropdown .tv-dropdown-content {
     width: 100%;
     position: relative;
   }
@@ -166,11 +166,11 @@
 }
 @media screen and (max-width: 900px) {
   .header-nav-menu .dropdown-content a,
-.header-nav-menu .dropdown .tv-dropdown-content a,
-.header-nav-menu .tv-dropdown-content a,
-.header-nav-menu .tv-dropdown .tv-dropdown-content a,
-.header-nav-menu .people-dropdown-content a,
-.header-nav-menu .people-dropdown .tv-dropdown-content a {
+  .header-nav-menu .dropdown .tv-dropdown-content a,
+  .header-nav-menu .tv-dropdown-content a,
+  .header-nav-menu .tv-dropdown .tv-dropdown-content a,
+  .header-nav-menu .people-dropdown-content a,
+  .header-nav-menu .people-dropdown .tv-dropdown-content a {
     margin-left: 25px;
   }
 }
@@ -489,21 +489,40 @@ body {
   }
 }
 @media screen and (max-width: 600px) {
-  .main-container .movie-info-content .movie-release-container .movie-genres .genres-list .movie-genres p {
+  .main-container
+    .movie-info-content
+    .movie-release-container
+    .movie-genres
+    .genres-list
+    .movie-genres
+    p {
     font-size: 0.8rem;
   }
 }
-.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer {
+.main-container
+  .movie-info-content
+  .movie-release-container
+  .movie-trailer
+  .btn-trailer {
   border: none;
   outline: none;
   background-color: transparent;
   font-size: 1rem;
 }
-.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer:hover {
+.main-container
+  .movie-info-content
+  .movie-release-container
+  .movie-trailer
+  .btn-trailer:hover {
   opacity: 0.7;
   cursor: pointer;
 }
-.main-container .movie-info-content .movie-release-container .movie-trailer .btn-trailer i {
+.main-container
+  .movie-info-content
+  .movie-release-container
+  .movie-trailer
+  .btn-trailer
+  i {
   font-size: 1.2rem;
 }
 .main-container .movie-info-content .movie-overview {
@@ -538,6 +557,7 @@ body {
 .main-container .movie-info-content .cast-contianer {
   display: flex;
   width: 100%;
+  overflow: hidden;
 }
 .main-container .movie-info-content .cast-contianer .cast-list {
   width: 100%;
@@ -547,11 +567,21 @@ body {
   width: 25%;
 }
 @media screen and (max-width: 600px) {
-  .main-container .movie-info-content .cast-contianer .cast-list .swiper-slide .actor-name {
+  .main-container
+    .movie-info-content
+    .cast-contianer
+    .cast-list
+    .swiper-slide
+    .actor-name {
     font-size: 0.6rem;
   }
 }
-.main-container .movie-info-content .cast-contianer .cast-list .swiper-slide .actor-img {
+.main-container
+  .movie-info-content
+  .cast-contianer
+  .cast-list
+  .swiper-slide
+  .actor-img {
   display: block;
   width: 350px;
   max-width: 100%;
@@ -562,11 +592,19 @@ body {
 .main-container .movie-info-content .recommendation-contianer {
   display: flex;
   width: 100%;
+  overflow: hidden;
 }
-.main-container .movie-info-content .recommendation-contianer .recommendation-list {
+.main-container
+  .movie-info-content
+  .recommendation-contianer
+  .recommendation-list {
   width: 100%;
 }
-.main-container .movie-info-content .recommendation-contianer .recommendation-list img {
+.main-container
+  .movie-info-content
+  .recommendation-contianer
+  .recommendation-list
+  img {
   cursor: pointer;
   display: block;
   width: 350px;
@@ -575,16 +613,28 @@ body {
   margin: auto;
   border-radius: 4px;
 }
-.main-container .movie-info-content .recommendation-contianer .recommendation-list .swiper-slide {
+.main-container
+  .movie-info-content
+  .recommendation-contianer
+  .recommendation-list
+  .swiper-slide {
   margin-left: 10px;
   width: 35%;
 }
 @media screen and (max-width: 600px) {
-  .main-container .movie-info-content .recommendation-contianer .recommendation-list .swiper-slide .recommendation-title {
+  .main-container
+    .movie-info-content
+    .recommendation-contianer
+    .recommendation-list
+    .swiper-slide
+    .recommendation-title {
     font-size: 0.6rem;
   }
 }
-.main-container .movie-info-content .recommendation-contianer .swiper-container {
+.main-container
+  .movie-info-content
+  .recommendation-contianer
+  .swiper-container {
   width: 100%;
   height: 100%;
 }
@@ -678,7 +728,9 @@ body {
   animation-delay: -0.8s;
 }
 @-webkit-keyframes sk-stretchdelay {
-  0%, 40%, 100% {
+  0%,
+  40%,
+  100% {
     -webkit-transform: scaleY(0.4);
   }
   20% {
@@ -686,7 +738,9 @@ body {
   }
 }
 @keyframes sk-stretchdelay {
-  0%, 40%, 100% {
+  0%,
+  40%,
+  100% {
     transform: scaleY(0.4);
     -webkit-transform: scaleY(0.4);
   }
@@ -694,4 +748,4 @@ body {
     transform: scaleY(1);
     -webkit-transform: scaleY(1);
   }
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */

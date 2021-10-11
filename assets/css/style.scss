@@ -30,6 +30,7 @@ body {
 
 .main-container {
   position: relative;
+  overflow: hidden;
 
   .search {
     display: block;
@@ -371,9 +372,12 @@ body {
       & .cast-contianer {
         display: flex;
         width: 100%;
+        overflow: hidden;
+
         margin-bottom: 20px;
         & .cast-list {
           width: 100%;
+          overflow: hidden;
 
           .swiper-slide {
             margin-left: 10px;
@@ -400,8 +404,11 @@ body {
       & .recommendation-contianer {
         display: flex;
         width: 100%;
+        overflow: hidden;
+
         .recommendation-list {
           width: 100%;
+          overflow: hidden;
           & img {
             cursor: pointer;
             display: block;
